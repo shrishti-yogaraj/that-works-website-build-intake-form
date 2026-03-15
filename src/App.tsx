@@ -287,7 +287,7 @@ function Step1({
    STEP 2 — Contact details
 ───────────────────────────────────────────── */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const URL_RE = /^https?:\/\/.+/;
+const URL_RE = /maps\.google\.|google\.[a-z]+\/maps|goo\.gl\/maps|maps\.app\.goo\.gl/i;
 const PHONE_RE = /^\+?[\d\s\-().]{7,20}$/;
 
 function Step2({
@@ -305,7 +305,7 @@ function Step2({
     : null;
 
   const mapsError = touched.google_maps_url && data.google_maps_url && !URL_RE.test(data.google_maps_url)
-    ? 'Enter a valid URL starting with http:// or https://'
+    ? 'Paste a Google Maps link — it should contain maps.google or similar'
     : null;
 
   const canContinue = data.google_maps_url.trim() && !emailError && !phoneError && !mapsError;
@@ -357,7 +357,7 @@ function Step2({
           <label className="form-label">Google Maps URL</label>
           <input
             className={`form-input${mapsError ? ' form-input--error' : ''}`}
-            type="url"
+            type="text"
             placeholder="Paste their Maps listing URL"
             value={data.google_maps_url}
             onChange={e => set('google_maps_url', e.target.value)}
@@ -449,6 +449,9 @@ function Step3({
             Paste Google reviews
             <span className="form-label-optional">optional</span>
           </label>
+          <p className="form-field-hint" style={{ marginBottom: 4 }}>
+            These reviews inform the tone, language, and feel of the website — pick ones that best reflect how the business should come across.
+          </p>
           <textarea
             className="form-textarea form-textarea--tall"
             placeholder="Copy and paste a handful of their best reviews here"
