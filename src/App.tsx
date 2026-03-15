@@ -25,6 +25,7 @@ interface FormData {
   rep_name: string;
   rep_email: string;
   notes: string;
+  priority: 'rush' | 'standard';
 }
 
 const EMPTY: FormData = {
@@ -42,6 +43,7 @@ const EMPTY: FormData = {
   rep_name: '',
   rep_email: '',
   notes: '',
+  priority: 'standard',
 };
 
 const INDUSTRIES = [
@@ -85,7 +87,21 @@ export default function App() {
     setStep(TOTAL_STEPS + 1);
 
     const payload = {
-      ...data,
+      businessName: data.business_name,
+      industry: data.industry,
+      primaryService: data.primary_service,
+      location: data.location,
+      foundedYear: data.founded_year,
+      contactEmail: data.business_email,
+      contactPhone: data.business_phone,
+      googleMapsUrl: data.google_maps_url,
+      starRating: data.star_rating,
+      reviewCount: data.review_count,
+      googleReviews: data.reviews_text,
+      salesRepName: data.rep_name,
+      salesRepEmail: data.rep_email,
+      notes: data.notes,
+      priority: data.priority,
       source: 'client-intake-form',
       timestamp: new Date().toISOString(),
     };
@@ -507,6 +523,28 @@ function Step4({
             value={data.notes}
             onChange={e => set('notes', e.target.value)}
           />
+        </div>
+
+        <div className="form-field">
+          <label className="form-label">How urgent is this?</label>
+          <div className="priority-toggle">
+            <button
+              type="button"
+              className={`priority-card${data.priority === 'rush' ? ' priority-card--selected' : ''}`}
+              onClick={() => set('priority', 'rush')}
+            >
+              <span className="priority-card-title">Rush</span>
+              <span className="priority-card-sub">Ready in 1 hour</span>
+            </button>
+            <button
+              type="button"
+              className={`priority-card${data.priority === 'standard' ? ' priority-card--selected' : ''}`}
+              onClick={() => set('priority', 'standard')}
+            >
+              <span className="priority-card-title">Standard</span>
+              <span className="priority-card-sub">Ready in 4–5 hours</span>
+            </button>
+          </div>
         </div>
       </div>
 
