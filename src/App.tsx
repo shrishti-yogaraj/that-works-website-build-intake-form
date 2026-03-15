@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import './index.css';
 
 const WEBHOOK_URL = (import.meta.env.VITE_WEBHOOK_URL as string) ||
@@ -123,6 +123,13 @@ export default function App() {
     setSubmitStatus('idle');
     submit();
   };
+
+  useEffect(() => {
+    const el = document.querySelector<HTMLElement>(
+      '.form-screen input, .form-screen select, .form-screen textarea'
+    );
+    el?.focus();
+  }, [animKey]);
 
   const progress = Math.max(4, ((step - 1) / TOTAL_STEPS) * 100);
   const showChrome = step <= TOTAL_STEPS;
