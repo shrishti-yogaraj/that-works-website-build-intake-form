@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import './index.css';
 
 const WEBHOOK_URL = (import.meta.env.VITE_WEBHOOK_URL as string) ||
-  'http://cleo.shrishtiyogaraj.com:5678/webhook/website-that-works-sales-rep-intake';
+  'https://cleo.shrishtiyogaraj.com/webhook/website-that-works-sales-rep-intake';
 
 const TOTAL_STEPS = 4;
 
