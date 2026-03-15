@@ -536,25 +536,19 @@ function Step4({
         </div>
 
         <div className="form-field">
-          <label className="form-label">How urgent is this?</label>
-          <div className="priority-toggle">
-            <button
-              type="button"
-              className={`priority-card${data.priority === 'rush' ? ' priority-card--selected' : ''}`}
-              onClick={() => set('priority', 'rush')}
-            >
-              <span className="priority-card-title">Rush</span>
-              <span className="priority-card-sub">Ready in 1 hour</span>
-            </button>
-            <button
-              type="button"
-              className={`priority-card${data.priority === 'standard' ? ' priority-card--selected' : ''}`}
-              onClick={() => set('priority', 'standard')}
-            >
-              <span className="priority-card-title">Standard</span>
-              <span className="priority-card-sub">Ready in 4–5 hours</span>
-            </button>
-          </div>
+          <label className="form-label">Need this in an hour?</label>
+          <label className={`rush-toggle${data.priority === 'rush' ? ' rush-toggle--on' : ''}`}>
+            <div className="rush-switch">
+              <input
+                type="checkbox"
+                checked={data.priority === 'rush'}
+                onChange={e => set('priority', e.target.checked ? 'rush' : 'standard')}
+              />
+              <div className="rush-track" />
+              <div className="rush-thumb" />
+            </div>
+            <span className="rush-label">Rush job</span>
+          </label>
         </div>
       </div>
 
