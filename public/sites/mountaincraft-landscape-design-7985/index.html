@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MountainCraft Landscape Design — Parker, Colorado</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --terracotta: #B5604A;
+  --terracotta-dark: #944C3A;
+  --sage: #7A8B6F;
+  --sage-light: #A3B396;
+  --sage-pale: #E8EDE4;
+  --warm-gray: #4A4543;
+  --warm-gray-light: #6B6563;
+  --warm-gray-pale: #F5F2EF;
+  --gold: #C9A84C;
+  --gold-light: #F0E5C4;
+  --cream: #FAF8F5;
+  --white: #FFFFFF;
+  --text: #2E2A28;
+  --text-light: #6B6563;
+  --shadow: rgba(46, 42, 40, 0.08);
+  --shadow-md: rgba(46, 42, 40, 0.12);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--cream);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.2; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
+}
+
+.nav.scrolled {
+  background: rgba(250, 248, 245, 0.97);
+  box-shadow: 0 1px 12px var(--shadow);
+  padding: 0.7rem 2rem;
+}
+
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  color: var(--white);
+  transition: color 0.4s;
+  white-space: nowrap;
+}
+
+.nav.scrolled .nav-brand { color: var(--warm-gray); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.3s;
+  letter-spacing: 0.02em;
+}
+
+.nav.scrolled .nav-links a { color: var(--warm-gray-light); }
+.nav.scrolled .nav-links a:hover { color: var(--terracotta); }
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: var(--terracotta) !important;
+  color: var(--white) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.3s;
+}
+
+.nav-cta:hover { background: var(--terracotta-dark) !important; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: background 0.4s, transform 0.3s;
+  display: block;
+}
+
+.nav.scrolled .hamburger span { background: var(--warm-gray); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(250, 248, 245, 0.98);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.mobile-menu.active { display: flex; }
+
+.mobile-menu a {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--warm-gray);
+}
+
+.mobile-menu .close-menu {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--warm-gray);
+  font-weight: 700;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1630807284621-9c1e13de79ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxiYWNreWFyZCUyMGxhbmRzY2FwZSUyMGNvbnN0cnVjdGlvbnxlbnwxfDB8fHwxNzczNjExNDczfDA&ixlib=rb-4.1.0&q=80&w=1080');
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(46, 42, 40, 0.78) 0%, rgba(46, 42, 40, 0.45) 60%, rgba(46, 42, 40, 0.25) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 8rem 2rem 4rem;
+  margin-left: 5%;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-content h1 span { color: var(--gold-light); }
+
+.hero-sub {
+  color: rgba(255,255,255,0.8);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: 2rem;
+  max-width: 520px;
+  line-height: 1.8;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--terracotta);
+  color: var(--white);
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.3s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-badge span {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-stars { color: var(--gold); font-size: 0.85rem; }
+
+/* SECTIONS */
+section { padding: 5rem 2rem; }
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--terracotta);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-bottom: 1.25rem;
+  color: var(--warm-gray);
+}
+
+.section-subtitle {
+  color: var(--text-light);
+  max-width: 600px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* PAIN SECTION */
+.pain-section { background: var(--white); }
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pain-card {
+  padding: 2rem;
+  background: var(--warm-gray-pale);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0 2px 2px 0;
+}
+
+.pain-card .pain-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--terracotta);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.pain-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--warm-gray);
+}
+
+.pain-card p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* SOLUTION */
+.solution-section { background: var(--cream); }
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.solution-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.solution-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.solution-list li {
+  padding-left: 1.75rem;
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+.solution-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 8px;
+  height: 8px;
+  background: var(--sage);
+  border-radius: 1px;
+}
+
+.solution-list li strong {
+  color: var(--warm-gray);
+  display: block;
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+
+/* HOW IT WORKS */
+.how-section { background: var(--warm-gray); color: var(--white); }
+
+.how-section .section-label { color: var(--gold); }
+.how-section .section-title { color: var(--white); }
+.how-section .section-subtitle { color: rgba(255,255,255,0.65); }
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.how-step {
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  position: relative;
+}
+
+.how-step .step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--gold);
+  opacity: 0.35;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.how-step h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--white);
+}
+
+.how-step p {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.how-cta-wrap { text-align: center; margin-top: 3rem; }
+
+.btn-gold {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--warm-gray);
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.3s, transform 0.15s;
+}
+
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* TESTIMONIALS */
+.testimonials-section { background: var(--sage-pale); }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 2px;
+  box-shadow: 0 2px 20px var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+
+.testimonial-card blockquote {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  flex: 1;
+  font-style: normal;
+}
+
+.testimonial-author {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--sage-pale);
+}
+
+.testimonial-author strong {
+  font-size: 0.9rem;
+  color: var(--warm-gray);
+  display: block;
+}
+
+.testimonial-author span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+/* ABOUT */
+.about-section { background: var(--white); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.about-img-wrap { position: relative; }
+
+.about-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.about-img-accent {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 4px solid var(--white);
+  box-shadow: 0 4px 20px var(--shadow-md);
+}
+
+.about-text p {
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--sage-pale);
+}
+
+.about-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+.about-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* IMAGE STRIP */
+.image-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.image-strip img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--warm-gray);
+  color: rgba(255,255,255,0.7);
+  padding: 3rem 2rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.footer p { font-size: 0.9rem; line-height: 1.7; }
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a { font-size: 0.9rem; transition: color 0.3s; }
+.footer-links a:hover { color: var(--white); }
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-contact-item a { transition: color 0.3s; }
+.footer-contact-item a:hover { color: var(--white); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* POPUP */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(46, 42, 40, 0.6);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(3px);
+}
+
+.popup-overlay.active { display: flex; }
+
+.popup {
+  background: var(--white);
+  max-width: 520px;
+  width: 100%;
+  padding: 2.5rem;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(46, 42, 40, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--warm-gray-light);
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.popup-close:hover { color: var(--warm-gray); }
+
+.popup h2 {
+  font-size: 1.6rem;
+  color: var(--warm-gray);
+  margin-bottom: 0.5rem;
+}
+
+.popup .popup-sub {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--warm-gray-light);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #DDD8D3;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--cream);
+  transition: border-color 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--sage); }
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--terracotta);
+  color: var(--white);
+  border: none;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.3s;
+}
+
+.form-submit:hover { background: var(--terracotta-dark); }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.form-success .check-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--sage-pale);
+  color: var(--sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+}
+
+.form-success h3 {
+  font-size: 1.3rem;
+  color: var(--warm-gray);
+  margin-bottom: 0.5rem;
+}
+
+.form-success p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .pain-grid,
+  .how-grid,
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  .solution-grid,
+  .about-grid { grid-template-columns: 1fr; }
+
+  .about-img { height: 350px; }
+  .about-img-accent { display: none; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+  .image-strip { grid-template-columns: 1fr 1fr; }
+  .image-strip img { height: 200px; }
+
+  .hero-content { margin-left: 0; padding: 7rem 1.5rem 3rem; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 3.5rem 1.25rem; }
+
+  .image-strip { grid-template-columns: 1fr; }
+  .image-strip img { height: 220px; }
+
+  .about-stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+  .popup { padding: 1.75rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand">MountainCraft</a>
+  <ul class="nav-links">
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#about">About Ron</a></li>
+    <li><button class="nav-cta cta-trigger">Talk to Ron</button></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu">✕</button>
+  <a href="#work" class="mobile-link">Our Work</a>
+  <a href="#how" class="mobile-link">Process</a>
+  <a href="#reviews" class="mobile-link">Reviews</a>
+  <a href="#about" class="mobile-link">About Ron</a>
+  <button class="btn-primary cta-trigger">Talk to Ron</button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-stars">★★★★★</span>
+      <span>10 years in Parker</span>
+    </div>
+    <h1>One guy. <span>One promise.</span><br>Your yard done right.</h1>
+    <p class="hero-sub">Ron handles your project from the first phone call to the final walkthrough. No sales team, no handoffs, no surprises on the invoice. Just honest landscaping work in Parker, Colorado.</p>
+    <button class="btn-primary cta-trigger">Get a Straight Answer — Call Ron</button>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section" id="work">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">The real concerns</p>
+      <h2 class="section-title">You've been through this before</h2>
+      <p class="section-subtitle">You're not worried about whether your yard can look better. You already know it can. Here's what's actually keeping you from pulling the trigger.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in">
+        <div class="pain-number">01</div>
+        <h3>The quote is a starting point, not a ceiling</h3>
+        <p>You've heard the stories. $8,000 estimate turns into $13,000 once they "discover" something mid-project. With Ron, the price you're quoted is the price you pay. Period. If something unexpected comes up, he calls you before spending your money.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-number">02</div>
+        <h3>Your yard becomes a construction zone—indefinitely</h3>
+        <p>They said two weeks. It's been five. Half the crew vanished. Your kids can't play outside. Ron schedules the work, shows up when he says he will, and finishes when he said he'd finish. Not complicated. Just disciplined.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-number">03</div>
+        <h3>You don't know who's going to be on your property</h3>
+        <p>You want to know who has access to your home and yard. When you hire Ron, Ron is the person who shows up. He's not farming your project out to a subcontractor you've never met. You talk to him. He does the work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution-section">
+  <div class="container">
+    <div class="solution-grid">
+      <div class="fade-in">
+        <img src="https://images.unsplash.com/photo-1760817074785-d47c6571bd0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxiZWZvcmUlMjBhZnRlciUyMGdhcmRlbiUyMHRyYW5zZm9ybWF0aW9ufGVufDF8MHx8fDE3NzM2MTE0NzR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Garden project completed in Parker" class="solution-img" loading="lazy">
+      </div>
+      <div class="fade-in">
+        <p class="section-label">What you actually get</p>
+        <h2 class="section-title">Landscaping that delivers exactly what was discussed</h2>
+        <ul class="solution-list">
+          <li>
+            <strong>Fixed-price quotes, detailed in writing</strong>
+            Your estimate breaks down materials, labor, and timeline. What's on paper is what you pay. No allowances, no vague line items.
+          </li>
+          <li>
+            <strong>Ron is the project—start to finish</strong>
+            He designs the plan, manages the schedule, and is physically present during the build. You won't be introduced to a "project manager" after you sign.
+          </li>
+          <li>
+            <strong>Residential focus, Parker only</strong>
+            Ron doesn't chase commercial contracts three counties away. He works in Parker. Your neighbor might be a past client. That kind of proximity keeps people honest.
+          </li>
+          <li>
+            <strong>Competent, not flashy</strong>
+            The goal isn't an award-winning design feature. It's a yard that works well, looks clean, holds up through Colorado weather, and was worth what you paid.
+          </li>
+        </ul>
+        <div style="margin-top: 2rem;">
+          <button class="btn-primary cta-trigger">Talk to Ron About Your Yard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="fade-in" style="text-align: center;">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">Three conversations. That's it.</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">No consultation waitlists, no design committee. You talk to Ron, he looks at your yard, and you get a clear answer.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step fade-in">
+        <div class="step-num">1</div>
+        <h3>You call or email Ron directly</h3>
+        <p>Tell him what you're thinking. Could be specific—"I need a patio"—or vague—"my backyard is a mess." Either works. No pressure, no sales pitch. He'll ask a few questions and set up a time to see the property.</p>
+      </div>
+      <div class="how-step fade-in">
+        <div class="step-num">2</div>
+        <h3>Ron visits and gives you a fixed quote</h3>
+        <p>He walks the yard, talks through options, and sends you a written quote within a few days. Materials, labor, timeline—all spelled out. If it doesn't fit your budget, he'll tell you what can be adjusted and what can't.</p>
+      </div>
+      <div class="how-step fade-in">
+        <div class="step-num">3</div>
+        <h3>Work starts and finishes on schedule</h3>
+        <p>Ron shows up on the date he committed to. He keeps you informed during the build. When the project wraps, you walk the finished work together. You pay what was quoted. Done.</p>
+      </div>
+    </div>
+    <div class="how-cta-wrap fade-in">
+      <button class="btn-gold cta-trigger">Start with a Phone Call</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="reviews">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">From Parker homeowners</p>
+      <h2 class="section-title">What people actually say</h2>
+      <p class="section-subtitle">Not "life-changing." Not "beyond our wildest dreams." Just solid work, finished on time, at the price discussed.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>We got three quotes for our backyard. Ron's was the most detailed—every line item was explained. Two other companies gave us round numbers with no breakdown. He finished the patio and grading in the timeframe he estimated, and the final bill matched the quote exactly. The yard looks good. We use it every weekend now.</blockquote>
+        <div class="testimonial-author">
+          <strong>Mark & Susan T.</strong>
+          <span>Parker, CO — Patio & grading</span>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>Ron was straightforward from the start. Told us what was realistic for our budget and didn't try to upsell us on things we didn't need. He was at our house every day of the project. Finished when he said he would. Our front yard actually looks like someone thought about it now. Appreciated the no-nonsense approach.</blockquote>
+        <div class="testimonial-author">
+          <strong>Jennifer L.</strong>
+          <span>Parker, CO — Front yard redesign</span>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <blockquote>We'd been putting off the retaining wall for two years because the first company we called made it sound like a nightmare. Ron came out, looked at it, gave us a price, and had it done in about a week. No drama. We were satisfied with how it turned out—it's solid and it looks right for the property.</blockquote>
+        <div class="testimonial-author">
+          <strong>David R.</strong>
+          <span>Parker, CO — Retaining wall</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE STRIP -->
+<div class="image-strip">
+  <img src="https://images.unsplash.com/photo-1662592006623-323af7535d4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzdG9uZSUyMHBhdGlvJTIwaW5zdGFsbGF0aW9uJTIwd29ya3xlbnwxfDB8fHwxNzczNjExNDc0fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Stone patio installation" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1657112302120-ff6ca52548d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzdGFja2VkJTIwc3RvbmUlMjB0ZXh0dXJlJTIwY2xvc2V8ZW58MXwwfHx8MTc3MzYxMTQ3NHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Stacked stone detail" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1658911940154-aa561f52b3a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxuYXRpdmUlMjBwbGFudHMlMjBnYXJkZW4lMjBiZWR8ZW58MXwwfHx8MTc3MzYxMTQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080" alt="Native plants garden bed" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1593296402439-e1a270dd253d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxob21lb3duZXIlMjBpbnNwZWN0aW5nJTIweWFyZCUyMHdvcmt8ZW58MXwwfHx8MTc3MzYxMTQ3M3ww&ixlib=rb-4.1.0&q=80&w=1080" alt="Homeowner inspecting completed work" loading="lazy">
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <img src="https://images.unsplash.com/photo-1722876720000-f39b65b7d4a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxjb250cmFjdG9yJTIwc3RhbmRpbmclMjB5YXJkJTIwcG9ydHJhaXR8ZW58MXwxfHx8MTc3MzYxMTQ3NHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Ron, owner of MountainCraft Landscape Design" class="about-img">
+        <img src="https://images.unsplash.com/photo-1723126906323-1f825d5eca83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxmYW1pbHklMjBzdGFuZGluZyUyMGZpbmlzaGVkJTIwbGFuZHNjYXBlfGVufDF8MHx8fDE3NzM2MTE0NzR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Satisfied homeowners with finished landscape" class="about-img-accent">
+      </div>
+      <div class="about-text fade-in">
+        <p class="section-label">About Ron</p>
+        <h2 class="section-title">Ten years of showing up in Parker</h2>
+        <p>Ron started MountainCraft in 2015 with a truck, a plan, and a straightforward idea: do residential landscaping for people in Parker, do it well, and don't overcomplicate it.</p>
+        <p>Ten years later, the operation is the same size by choice. He's not scaling. He's not franchising. He designs every project himself, manages the schedule, and is on-site during the build. When you call MountainCraft, you get Ron.</p>
+        <p>That's not a limitation—it's the whole point. You're not getting routed to a call center or matched with a random crew. You're hiring a person who's been doing this work in this town for a decade. He knows Parker soil, Parker weather, and Parker HOAs.</p>
+        <p>Ron's approach is simple: give an honest quote, stick to the timeline, finish the job, and move on to the next one. The repeat customers and referrals take care of the rest.</p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num">10</div>
+            <div class="about-stat-label">Years in Parker</div>
+          </div>
+          <div>
+            <div class="about-stat-num">5.0</div>
+            <div class="about-stat-label">Star Rating</div>
+          </div>
+          <div>
+            <div class="about-stat-num">14</div>
+            <div class="about-stat-label">Google Reviews</div>
+          </div>
+        </div>
+        <div style="margin-top: 2rem;">
+          <button class="btn-primary cta-trigger">Reach Ron Directly</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>MountainCraft Landscape Design</h4>
+      <p>Residential landscaping in Parker, Colorado. Owned and operated by Ron since 2015. Every project designed, managed, and built by the same person you'll talk to on the phone.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul class="footer-links">
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#how">Process</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#about">About Ron</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Ron</h4>
+      <div class="footer-contact-item">
+        <span>📧</span>
+        <a href="mailto:notavailable@test.com">notavailable@test.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <span>📞</span>
+        <a href="tel:0">0</a>
+      </div>
+      <div class="footer-contact-item">
+        <span>📍</span>
+        <span>Parker, Colorado</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 MountainCraft Landscape Design. All rights reserved. Parker, Colorado.
+  </div>
+</footer>
+
+<!-- CONTACT POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div id="contactForm">
+      <h2>Talk to Ron</h2>
+      <p class="popup-sub">No contact form queue. Ron reads these himself and responds within a day—usually sooner. Or just call if you'd rather talk it out.</p>
+      <form id="theForm">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="First and last name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@email.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Best number to reach you">
+        </div>
+        <div class="form-group">
+          <label for="message">What are you thinking?</label>
+          <textarea id="message" name="message" placeholder="Tell Ron about your yard—what's going on, what you'd like to change, rough budget if you have one."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send It Over</button>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="check-icon">✓</div>
+      <h3>Message sent</h3>
+      <p>Ron got it. He'll be in touch within one business day—usually a lot sooner. If it's urgent, call him directly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const closeMenu = document.getElementById('closeMenu');
+
+hamburger.addEventListener('click', () => { mobileMenu.classList.add('active'); });
+closeMenu.addEventListener('click', () => { mobileMenu.classList.remove('active'); });
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => { mobileMenu.classList.remove('active'); });
+});
+
+// POPUP
+const popupOverlay = document.getElementById('popupOverlay');
+const popupClose = document.getElementById('popupClose');
+
+document.querySelectorAll('.cta-trigger').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    popupOverlay.classList.add('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closePopup() {
+  popupOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+popupClose.addEventListener('click', closePopup);
+popupOverlay.addEventListener('click', (e) => {
+  if (e.target === popupOverlay) closePopup();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePopup();
+});
+
+// FORM
+const theForm = document.getElementById('theForm');
+const contactFormDiv = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+theForm.querySelector('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  contactFormDiv.querySelector('form').style.display = 'none';
+  contactFormDiv.querySelector('h2').style.display = 'none';
+  contactFormDiv.querySelector('.popup-sub').style.display = 'none';
+  formSuccess.style.display = 'block';
+});
+
+// FADE IN ON SCROLL
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Cleaning Services — Parker, Colorado</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --charcoal: #1a2332;
+  --navy: #243447;
+  --teal: #1a7a6d;
+  --teal-dark: #14604f;
+  --teal-light: #e6f5f2;
+  --gray-100: #f7f8f9;
+  --gray-200: #ebedf0;
+  --gray-300: #d1d5db;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+  --radius: 6px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: var(--charcoal);
+  line-height: 1.6;
+  background: var(--white);
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav.scrolled {
+  background: rgba(26, 35, 50, 0.97);
+  padding: 12px 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.nav-brand {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.nav-brand span {
+  color: #5ec4b3;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--white);
+}
+
+.nav-cta {
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  padding: 8px 20px !important;
+  border-radius: var(--radius);
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+  cursor: pointer;
+}
+
+.nav-cta:hover {
+  background: var(--teal-dark) !important;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+  display: block;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 35, 50, 0.98);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.mobile-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1768039049614-f3c2bae3f1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxjbGVhbiUyMGtpdGNoZW4lMjBjb3VudGVyfGVufDF8MHx8fDE3NzM2MTEzNzN8MA&ixlib=rb-4.1.0&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(26, 35, 50, 0.88) 0%,
+    rgba(26, 35, 50, 0.75) 40%,
+    rgba(26, 122, 109, 0.4) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5ec4b3;
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-badge svg {
+  width: 14px;
+  height: 14px;
+  fill: #f5c842;
+}
+
+.hero h1 {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(26, 122, 109, 0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--white);
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+.hero-contact-bar {
+  margin-top: 48px;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-contact-bar a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.hero-contact-bar a:hover {
+  color: var(--white);
+}
+
+.hero-contact-bar svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* SECTIONS */
+section {
+  padding: 96px 24px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--gray-500);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* PAIN SECTION */
+.pain-section {
+  background: var(--gray-100);
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .pain-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.pain-card {
+  background: var(--white);
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+.pain-icon {
+  width: 48px;
+  height: 48px;
+  background: #fef2f2;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pain-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: #dc2626;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pain-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--charcoal);
+}
+
+.pain-card p {
+  font-size: 0.925rem;
+  color: var(--gray-500);
+  line-height: 1.65;
+}
+
+/* SOLUTION SECTION */
+.solution-section {
+  background: var(--white);
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .solution-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.solution-image {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.solution-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.solution-list {
+  list-style: none;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.solution-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.solution-check {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  background: var(--teal-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.solution-check svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.solution-list li div strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 2px;
+}
+
+.solution-list li div span {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* HOW IT WORKS */
+.how-section {
+  background: var(--charcoal);
+  color: var(--white);
+}
+
+.how-section .section-label { color: #5ec4b3; }
+.how-section .section-title { color: var(--white); }
+.how-section .section-subtitle { color: rgba(255,255,255,0.6); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 56px;
+  height: 56px;
+  background: rgba(94, 196, 179, 0.12);
+  border: 2px solid rgba(94, 196, 179, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #5ec4b3;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.step p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.how-cta {
+  text-align: center;
+  margin-top: 56px;
+}
+
+/* TESTIMONIALS */
+.testimonials-section {
+  background: var(--gray-100);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+}
+
+.testimonial-card {
+  background: var(--white);
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.testimonial-stars svg {
+  width: 16px;
+  height: 16px;
+  fill: #f5c842;
+}
+
+.testimonial-card blockquote {
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: normal;
+}
+
+.testimonial-author {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.testimonial-detail {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-top: 2px;
+}
+
+/* ABOUT */
+.about-section {
+  background: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.about-image {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
+.about-image-overlay {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(26, 35, 50, 0.9);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.about-text p {
+  font-size: 1rem;
+  color: var(--gray-700);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+  padding-top: 36px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.about-stat-number {
+  font-family: 'Merriweather', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.about-stat-label {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.7);
+  padding: 64px 24px 32px;
+}
+
+.footer-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.footer h4 {
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.footer-brand {
+  font-family: 'Merriweather', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--white);
+}
+
+.footer-contact-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.875rem;
+}
+
+.footer-contact-item a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-item a:hover { color: var(--white); }
+
+.footer-contact-item svg {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  stroke: #5ec4b3;
+  fill: none;
+  stroke-width: 2;
+}
+
+.footer-bottom {
+  max-width: 1080px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* CONTACT POPUP */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 35, 50, 0.7);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.popup-overlay.open {
+  display: flex;
+}
+
+.popup {
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 480px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--gray-500);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+
+.popup-close:hover { color: var(--charcoal); }
+
+.popup h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--charcoal);
+}
+
+.popup > p {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+  transition: border-color 0.2s;
+  outline: none;
+  background: var(--white);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(26, 122, 109, 0.1);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.popup-submit {
+  background: var(--teal);
+  color: var(--white);
+  padding: 14px 32px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+
+.popup-submit:hover {
+  background: var(--teal-dark);
+}
+
+.popup-or {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-top: 8px;
+}
+
+.popup-or a {
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.popup-or a:hover { text-decoration: underline; }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.form-success svg {
+  width: 56px;
+  height: 56px;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 1.5;
+  margin-bottom: 16px;
+}
+
+.form-success h3 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--charcoal);
+}
+
+.form-success p {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* ANIMATIONS */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* GALLERY STRIP */
+.gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-height: 280px;
+  overflow: hidden;
+}
+
+.gallery-strip img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .gallery-strip { grid-template-columns: 1fr; max-height: none; }
+  .gallery-strip img { height: 200px; }
+  section { padding: 72px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-brand">Value <span>Cleaning</span></a>
+  <ul class="nav-links">
+    <li><a href="#pain">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#" class="nav-cta cta-trigger">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#pain" class="mobile-link">Why Us</a>
+  <a href="#how" class="mobile-link">How It Works</a>
+  <a href="#testimonials" class="mobile-link">Reviews</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#" class="cta-trigger" style="background:var(--teal); padding:12px 32px; border-radius:var(--radius); font-weight:600;">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      5.0 Stars · 29 Reviews · Parker, CO
+    </div>
+    <h1>Reliable cleaning for your home and office. For 16 years straight.</h1>
+    <p>Locally owned by Roan. Serving Parker, Colorado since 2010. We show up on time, do the job right, and charge what we quote. That's it.</p>
+    <div class="hero-actions">
+      <button class="btn-primary cta-trigger">
+        Get a Free Quote
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <a href="tel:+13039280809" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (303) 928-0809
+      </a>
+    </div>
+    <div class="hero-contact-bar">
+      <a href="mailto:roan@valuecleaningservices.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        roan@valuecleaningservices.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain-section" id="pain">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">Sound Familiar?</div>
+      <div class="section-title">You've been burned before.</div>
+      <div class="section-subtitle">Finding a cleaning service you can actually trust shouldn't be this hard.</div>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>No-shows and last-minute cancellations</h3>
+        <p>You clear your schedule, rearrange your day, and the cleaning crew never shows. Or they cancel an hour before. You're left with a dirty house and wasted time.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Strangers in your home with no accountability</h3>
+        <p>A different person every time. No one to call if something goes wrong. You don't know who's walking through your front door, and that's not a comfortable feeling.</p>
+      </div>
+      <div class="pain-card fade-in">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Surprise invoices and hidden fees</h3>
+        <p>The quote said one thing, the bill says another. Extra charges you didn't agree to. You shouldn't need a magnifying glass to understand what you're paying for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip">
+  <img src="https://images.unsplash.com/photo-1691406874341-2d3f60d5accf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx3aGl0ZSUyMHNwYWNlJTIwbWluaW1hbCUyMGludGVyaW9yfGVufDF8MHx8fDE3NzM2MTEzNzN8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Clean minimal interior" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1765556556784-7656ee0a1bd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzcG90bGVzcyUyMGJhdGhyb29tJTIwdGlsZXN8ZW58MXwwfHx8MTc3MzYxMTM3M3ww&ixlib=rb-4.1.0&q=80&w=1080" alt="Spotless bathroom" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1718066236069-a4d42a6436a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzdW5saXQlMjByb29tJTIwZW1wdHklMjBmbG9vcnxlbnwxfDB8fHwxNzczNjExMzczfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Sunlit clean floor" loading="lazy">
+</div>
+
+<!-- SOLUTION SECTION -->
+<section class="solution-section" id="solution">
+  <div class="container">
+    <div class="solution-grid">
+      <div class="solution-image fade-in">
+        <img src="https://images.unsplash.com/photo-1765556556784-7656ee0a1bd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzcG90bGVzcyUyMGJhdGhyb29tJTIwdGlsZXN8ZW58MXwwfHx8MTc3MzYxMTM3M3ww&ixlib=rb-4.1.0&q=80&w=1080" alt="Spotless bathroom tiles" loading="lazy">
+      </div>
+      <div class="fade-in">
+        <div class="section-label">The Value Difference</div>
+        <div class="section-title">One owner. One standard. Every single time.</div>
+        <ul class="solution-list">
+          <li>
+            <div class="solution-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <strong>Roan runs this business personally</strong>
+              <span>Not a call center, not an app. When you call, you talk to the person responsible for the quality of your clean.</span>
+            </div>
+          </li>
+          <li>
+            <div class="solution-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <strong>16 years of showing up on time</strong>
+              <span>We've cleaned homes and offices in Parker since 2010. You don't last that long in this business without being reliable.</span>
+            </div>
+          </li>
+          <li>
+            <div class="solution-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <strong>Transparent, affordable pricing</strong>
+              <span>Your quote is your price. No surprise fees, no add-ons you didn't ask for. We tell you what it costs, then we do the work.</span>
+            </div>
+          </li>
+          <li>
+            <div class="solution-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <strong>Homes and offices, regular or one-time</strong>
+              <span>Weekly, biweekly, monthly, or just once. Deep cleans, move-out cleans, office maintenance. Whatever you need.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div style="text-align:center;" class="fade-in">
+      <div class="section-label">How It Works</div>
+      <div class="section-title">Three steps. No runaround.</div>
+      <div class="section-subtitle" style="margin:0 auto;">From first call to clean home—usually within days.</div>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-number">1</div>
+        <h3>Tell us what you need</h3>
+        <p>Call, email, or fill out the form. Tell us about your space—house, office, size, and how often you want it cleaned. Takes two minutes.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">2</div>
+        <h3>Get a straight quote</h3>
+        <p>Roan will get back to you same day or next morning with a clear, honest price. No pressure. No sales pitch. Just the number.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-number">3</div>
+        <h3>We show up and clean</h3>
+        <p>On the day we agreed, at the time we said. We do the work, you come home to a clean space. That's the whole arrangement.</p>
+      </div>
+    </div>
+    <div class="how-cta fade-in">
+      <button class="btn-primary cta-trigger" style="background:#5ec4b3; color:var(--charcoal); font-weight:700;">
+        Request Your Free Quote
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;">
+      <div class="section-label">What Customers Say</div>
+      <div class="section-title">29 reviews. 5 stars. No exceptions.</div>
+      <div class="section-subtitle" style="margin:0 auto;">Real feedback from real Parker residents and business owners.</div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"We've had the same cleaner come every two weeks for over three years now. Always on time, always thorough. My kitchen hasn't looked this good since we moved in. I don't even think about it anymore—it just gets done."</blockquote>
+        <div class="testimonial-author">Karen M.</div>
+        <div class="testimonial-detail">Homeowner · Parker, CO</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"I run a small office on Mainstreet and needed someone who wouldn't flake on me. Roan quoted me a fair price, showed up when he said he would, and the office looked great. We're on a weekly schedule now. Couldn't be easier."</blockquote>
+        <div class="testimonial-author">David T.</div>
+        <div class="testimonial-detail">Small Business Owner · Parker, CO</div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>"Called on a Tuesday, had a quote by Wednesday morning, and they cleaned our whole house before the weekend. No surprises on the bill—exactly what they said. Friendly, professional, and quick. Already booked them again."</blockquote>
+        <div class="testimonial-author">Lisa & Mark R.</div>
+        <div class="testimonial-detail">Homeowners · Parker, CO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image fade-in">
+        <img src="https://images.unsplash.com/photo-1772442126046-29faff1ad234?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxsb2NhbCUyMGJ1c2luZXNzJTIwb3duZXIlMjBwb3J0cmFpdHxlbnwxfDF8fHwxNzczNjExMzczfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Roan, owner of Value Cleaning Services" loading="lazy">
+        <div class="about-image-overlay">Roan · Owner & Operator</div>
+      </div>
+      <div class="fade-in">
+        <div class="section-label">About Us</div>
+        <div class="section-title">Locally owned. Personally run. Since 2010.</div>
+        <p>Value Cleaning Services isn't a franchise, an app, or a side hustle. It's a real cleaning company run by a real person in Parker, Colorado.</p>
+        <p>Roan started the business 16 years ago with a simple idea: show up when you say you will, clean the way you'd want your own home cleaned, and charge a fair price for it. That approach has kept customers coming back year after year—and has earned a perfect 5-star rating from 29 reviews.</p>
+        <p>Every dollar stays local. When you hire Value Cleaning, you're supporting your neighbor.</p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-number">16</div>
+            <div class="about-stat-label">Years in Business</div>
+          </div>
+          <div>
+            <div class="about-stat-number">5.0</div>
+            <div class="about-stat-label">Star Rating</div>
+          </div>
+          <div>
+            <div class="about-stat-number">29</div>
+            <div class="about-stat-label">Customer Reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section style="background: var(--teal); padding: 64px 24px; text-align: center;">
+  <div class="container fade-in">
+    <h2 style="font-family:'Merriweather',serif; font-size:clamp(1.4rem,3vw,2rem); color:var(--white); margin-bottom:12px; font-weight:700;">Ready for a clean you can count on?</h2>
+    <p style="color:rgba(255,255,255,0.85); font-size:1.05rem; margin-bottom:28px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.6;">Get a free, no-obligation quote today. Call Roan directly or send us a message.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-primary cta-trigger" style="background:var(--white); color:var(--charcoal); font-weight:700;">Get Your Free Quote</button>
+      <a href="tel:+13039280809" class="btn-secondary" style="border-color:rgba(255,255,255,0.5); color:var(--white);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (303) 928-0809
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Value Cleaning Services</div>
+      <p>Locally owned house and office cleaning in Parker, Colorado. Serving the community with reliable, affordable service since 2010.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#pain">Why Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+13039280809">(303) 928-0809</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:roan@valuecleaningservices.com">roan@valuecleaningservices.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Parker, Colorado</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Value Cleaning Services. All rights reserved. Parker, Colorado.
+  </div>
+</footer>
+
+<!-- CONTACT POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <button class="popup-close" id="popupClose">&times;</button>
+    <div id="formContent">
+      <h2>Get a Free Quote</h2>
+      <p>Tell us what you need. Roan will get back to you within one business day with a clear, honest price.</p>
+      <form class="popup-form" id="contactForm">
+        <div class="form-field">
+          <label for="contactName">Your Name</label>
+          <input type="text" id="contactName" name="name" required placeholder="First and last name">
+        </div>
+        <div class="form-field">
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" name="email" required placeholder="you@email.com">
+        </div>
+        <div class="form-field">
+          <label for="contactPhone">Phone Number</label>
+          <input type="tel" id="contactPhone" name="phone" placeholder="(303) 555-1234">
+        </div>
+        <div class="form-field">
+          <label for="contactMessage">What do you need cleaned?</label>
+          <textarea id="contactMessage" name="message" placeholder="Home, office, size, how often — whatever helps us give you an accurate quote."></textarea>
+        </div>
+        <button type="submit" class="popup-submit">Send My Request</button>
+      </form>
+      <div class="popup-or">
+        Or call Roan directly: <a href="tel:+13039280809">(303) 928-0809</a>
+      </div>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11.5 14.5 16 9.5"/></svg>
+      <h3>Message sent.</h3>
+      <p>Roan will get back to you within one business day with your quote. If you need something sooner, call <a href="tel:+13039280809" style="color:var(--teal); font-weight:600; text-decoration:none;">(303) 928-0809</a> directly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// Contact popup
+const popupOverlay = document.getElementById('popupOverlay');
+const popupCloseBtn = document.getElementById('popupClose');
+const contactForm = document.getElementById('contactForm');
+const formContent = document.getElementById('formContent');
+const formSuccess = document.getElementById('formSuccess');
+
+function openPopup(e) {
+  e.preventDefault();
+  mobileMenu.classList.remove('open');
+  popupOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset form state
+  formContent.style.display = 'block';
+  formSuccess.style.display = 'none';
+  contactForm.reset();
+}
+
+function closePopup() {
+  popupOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.cta-trigger').forEach(btn => {
+  btn.addEventListener('click', openPopup);
+});
+
+popupCloseBtn.addEventListener('click', closePopup);
+popupOverlay.addEventListener('click', (e) => {
+  if (e.target === popupOverlay) closePopup();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePopup();
+});
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formContent.style.display = 'none';
+  formSuccess.style.display = 'block';
+});
+
+// Fade in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

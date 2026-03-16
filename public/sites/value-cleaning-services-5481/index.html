@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Cleaning Services | Parker, Colorado</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --forest: #2C5F41;
+  --forest-dark: #1E4430;
+  --forest-light: #3A7A56;
+  --charcoal: #2D2D2D;
+  --charcoal-light: #4A4A4A;
+  --warm-gray: #6B6B6B;
+  --light-gray: #E8E5E0;
+  --cream: #F7F5F2;
+  --off-white: #FAFAF8;
+  --white: #FFFFFF;
+  --warm-beige: #D4CFC7;
+  --accent-sand: #C4B9A7;
+  --text-primary: #2D2D2D;
+  --text-secondary: #5A5A5A;
+  --text-light: #8A8A8A;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --radius: 4px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+  background: var(--off-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 24px;
+  transition: all 0.35s ease;
+  background: transparent;
+}
+
+.nav.scrolled {
+  background: rgba(255,255,255,0.97);
+  box-shadow: var(--shadow-sm);
+  padding: 12px 24px;
+  backdrop-filter: blur(10px);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  transition: color 0.35s ease;
+  text-transform: uppercase;
+}
+
+.nav.scrolled .nav-brand {
+  color: var(--charcoal);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.3s ease;
+  letter-spacing: 0.01em;
+}
+
+.nav.scrolled .nav-links a {
+  color: var(--text-secondary);
+}
+
+.nav-links a:hover {
+  color: var(--white);
+}
+
+.nav.scrolled .nav-links a:hover {
+  color: var(--forest);
+}
+
+.nav-cta-link {
+  background: var(--forest);
+  color: var(--white) !important;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-cta-link:hover {
+  background: var(--forest-dark) !important;
+  color: var(--white) !important;
+}
+
+.nav-phone {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.02em;
+}
+
+.nav.scrolled .nav-phone {
+  color: var(--forest);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s ease;
+  border-radius: 1px;
+}
+
+.nav.scrolled .hamburger span {
+  background: var(--charcoal);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--white);
+  z-index: 999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu.active {
+  display: flex;
+  opacity: 1;
+}
+
+.mobile-menu a {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--charcoal);
+  padding: 8px;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1759238136854-913e5e383308?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxjbGVhbiUyMGtpdGNoZW4lMjBjb3VudGVydG9wfGVufDF8MHx8fDE3NzM2MTA4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(30,68,48,0.82) 0%, rgba(45,45,45,0.75) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 120px 24px 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 24px;
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius);
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--white);
+  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--white);
+  color: var(--forest-dark);
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary:hover {
+  background: var(--cream);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255,255,255,0.35);
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.08);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.hero-stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.hero-stat-label {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 24px;
+}
+
+.section-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 14px;
+}
+
+.section-heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  color: var(--charcoal);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.section-subtext {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* PAIN SECTION */
+.pain-section {
+  background: var(--white);
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.pain-card {
+  padding: 36px 28px;
+  background: var(--cream);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--warm-beige);
+  transition: all 0.3s ease;
+}
+
+.pain-card:hover {
+  border-left-color: var(--forest);
+}
+
+.pain-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--warm-beige);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.pain-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.pain-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* SOLUTION SECTION */
+.solution-section {
+  background: var(--off-white);
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-top: 56px;
+}
+
+.solution-image {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.solution-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.solution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.solution-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.solution-check {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: var(--forest);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.solution-item h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.solution-item p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* HOW IT WORKS */
+.how-section {
+  background: var(--forest-dark);
+  color: var(--white);
+}
+
+.how-section .section-label {
+  color: rgba(255,255,255,0.5);
+}
+
+.how-section .section-heading {
+  color: var(--white);
+}
+
+.how-section .section-subtext {
+  color: rgba(255,255,255,0.65);
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 56px;
+}
+
+.how-card {
+  text-align: center;
+  padding: 40px 24px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.how-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--forest-light);
+  opacity: 0.5;
+  margin-bottom: 16px;
+}
+
+.how-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.how-card p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+}
+
+/* TESTIMONIALS */
+.testimonials-section {
+  background: var(--cream);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 56px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  padding: 36px 28px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-stars {
+  color: #D4A843;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.testimonial-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  flex: 1;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--forest);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--charcoal);
+}
+
+.testimonial-location {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+/* ABOUT */
+.about-section {
+  background: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.about-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.about-img {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-img:first-child {
+  margin-top: 32px;
+}
+
+.about-text p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.about-stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.about-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* CTA BANNER */
+.cta-banner {
+  background-image: url('https://images.unsplash.com/photo-1537544179035-40d40798be9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxvcmdhbml6ZWQlMjBsaXZpbmclMjByb29tfGVufDF8MHx8fDE3NzM2MTA4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(30,68,48,0.88), rgba(45,45,45,0.82));
+}
+
+.cta-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-banner h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--white);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.cta-banner p {
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+.btn-cta-white {
+  display: inline-block;
+  background: var(--white);
+  color: var(--forest-dark);
+  padding: 14px 36px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-cta-white:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* FOOTER */
+.footer {
+  background: var(--charcoal);
+  color: rgba(255,255,255,0.6);
+  padding: 64px 24px 32px;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-brand {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
+.footer-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  max-width: 340px;
+}
+
+.footer h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.88rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--white);
+}
+
+.footer-contact-item {
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.footer-contact-item a {
+  transition: color 0.3s ease;
+}
+
+.footer-contact-item a:hover {
+  color: var(--white);
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* CONTACT POPUP */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.popup {
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 480px;
+  width: 100%;
+  padding: 48px 36px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.popup-overlay.active .popup {
+  transform: translateY(0);
+}
+
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 4px 8px;
+  transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+  color: var(--charcoal);
+}
+
+.popup h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  color: var(--charcoal);
+}
+
+.popup-sub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.92rem;
+  color: var(--charcoal);
+  transition: border-color 0.3s ease;
+  background: var(--off-white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--forest);
+  background: var(--white);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-submit {
+  width: 100%;
+  background: var(--forest);
+  color: var(--white);
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: var(--forest-dark);
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.form-success .checkmark {
+  width: 56px;
+  height: 56px;
+  background: var(--forest);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
+.form-success h4 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  color: var(--charcoal);
+}
+
+.form-success p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .pain-grid,
+  .how-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .solution-grid,
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .solution-image {
+    order: -1;
+  }
+
+  .about-images {
+    order: -1;
+  }
+
+  .hero-stats {
+    gap: 24px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  section {
+    padding: 72px 20px;
+  }
+
+  .hero-content {
+    padding: 100px 20px 60px;
+  }
+
+  .popup {
+    padding: 36px 24px;
+  }
+
+  .about-stats {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .pain-grid,
+  .how-grid,
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid > :last-child {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Value Cleaning Services</a>
+    <ul class="nav-links">
+      <li><a href="#pain">Why Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">Process</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="tel:+13039280809" class="nav-phone">303-928-0809</a></li>
+      <li><a class="nav-cta-link cta-trigger">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="#pain" class="mobile-nav-link">Why Us</a>
+  <a href="#services" class="mobile-nav-link">Services</a>
+  <a href="#how" class="mobile-nav-link">Process</a>
+  <a href="#testimonials" class="mobile-nav-link">Reviews</a>
+  <a href="#about" class="mobile-nav-link">About</a>
+  <a href="tel:+13039280809" style="color:var(--forest);font-weight:600;">303-928-0809</a>
+  <a class="cta-trigger" style="background:var(--forest);color:#fff;padding:12px 32px;border-radius:4px;font-weight:600;cursor:pointer;">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Serving Parker, CO Since 2010</div>
+    <h1>Your home deserves someone who shows up and gets it right.</h1>
+    <p>Value Cleaning Services has spent 16 years earning trust one clean at a time. No hidden fees. No excuses. Just reliable, detailed work from a team that treats your space like their own.</p>
+    <div class="hero-cta-group">
+      <button class="btn-primary cta-trigger">Request a Free Estimate</button>
+      <a href="tel:+13039280809" class="btn-secondary">
+        <span>📞</span> 303-928-0809
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-value">16</div>
+        <div class="hero-stat-label">Years in Business</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">5.0 ★</div>
+        <div class="hero-stat-label">Google Rating</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">100%</div>
+        <div class="hero-stat-label">Referral-Built</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION -->
+<section class="pain-section" id="pain">
+  <div class="section-container">
+    <div class="fade-in">
+      <div class="section-label">Sound familiar?</div>
+      <h2 class="section-heading">You've been let down before.</h2>
+      <p class="section-subtext">Most people who call us have already tried another cleaner. Here's what usually went wrong.</p>
+    </div>
+    <div class="pain-grid fade-in">
+      <div class="pain-card">
+        <div class="pain-icon">🚫</div>
+        <h3>No-shows and excuses</h3>
+        <p>They booked a day. You rearranged your schedule. They didn't show. Or they showed up late, rushed through, and left. You're back to square one—except now you're angry.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">👀</div>
+        <h3>Sloppy work, no accountability</h3>
+        <p>Corners were cut—literally. Baseboards ignored. Bathrooms half-done. When you raised it, they got defensive or stopped returning calls entirely. You ended up redoing it yourself.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💸</div>
+        <h3>Hidden costs, vague pricing</h3>
+        <p>The quote said one thing. The invoice said another. Suddenly there were "additional fees" for things you thought were included. Nobody explained anything upfront. Trust? Gone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION SECTION -->
+<section class="solution-section" id="services">
+  <div class="section-container">
+    <div class="fade-in">
+      <div class="section-label">The difference</div>
+      <h2 class="section-heading">We fix what other cleaners got wrong.</h2>
+      <p class="section-subtext">Margarito and his team have spent 16 years building a business where promises are kept and work speaks for itself.</p>
+    </div>
+    <div class="solution-grid fade-in">
+      <div class="solution-image">
+        <img src="https://images.unsplash.com/photo-1760067537877-dd4d2722c649?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzcG90bGVzcyUyMGJhdGhyb29tJTIwZGV0YWlsfGVufDF8MHx8fDE3NzM2MTA4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Spotless bathroom detail showing attention to quality" loading="lazy">
+      </div>
+      <div class="solution-list">
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div>
+            <h4>Residential Deep Cleaning</h4>
+            <p>Every room, every surface, every detail. We clean homes like we'd want ours cleaned—thoroughly, carefully, and completely.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div>
+            <h4>Commercial Cleaning</h4>
+            <p>Offices, retail spaces, and commercial properties maintained to a standard that reflects well on your business. Flexible scheduling, consistent results.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div>
+            <h4>Move-In / Move-Out Cleaning</h4>
+            <p>Whether you're getting ready to sell or settling into a new place, we make sure the space is spotless from ceiling to baseboard.</p>
+          </div>
+        </div>
+        <div class="solution-item">
+          <div class="solution-check">✓</div>
+          <div>
+            <h4>Recurring Maintenance Cleaning</h4>
+            <p>Weekly, biweekly, or monthly. Same crew, same standard, same attention to detail every single visit. Your home stays clean—not just occasionally.</p>
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <button class="btn-primary cta-trigger" style="background:var(--forest);color:var(--white);">Get Your Free Estimate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-container">
+    <div class="fade-in" style="text-align:center;">
+      <div class="section-label">How it works</div>
+      <h2 class="section-heading" style="color:var(--white);">Three steps. Zero hassle.</h2>
+      <p class="section-subtext" style="margin-left:auto;margin-right:auto;color:rgba(255,255,255,0.65);">We keep things simple because that's how it should be. No runaround, no waiting games.</p>
+    </div>
+    <div class="how-grid fade-in">
+      <div class="how-card">
+        <div class="how-number">01</div>
+        <h3>Tell us what you need</h3>
+        <p>Call us at 303-928-0809 or fill out the form. We'll ask a few honest questions about your space and what you're looking for. No pressure, no pitch.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-number">02</div>
+        <h3>Get a clear, fair quote</h3>
+        <p>We'll give you a straightforward price that covers everything. No surprise fees on the invoice. What we quote is what you pay. Simple.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-number">03</div>
+        <h3>We show up and deliver</h3>
+        <p>On the day we agreed. At the time we said. The crew arrives, does thorough work, and leaves your space noticeably cleaner. That's it. That's the whole thing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-container">
+    <div class="fade-in" style="text-align:center;">
+      <div class="section-label">What customers say</div>
+      <h2 class="section-heading">5.0 stars across 8 Google reviews.</h2>
+      <p class="section-subtext" style="margin-left:auto;margin-right:auto;">Every customer found us through word-of-mouth or Google Maps. We don't advertise. Our work does that for us.</p>
+    </div>
+    <div class="testimonials-grid fade-in">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"We'd been through three different cleaning services in two years. Missed appointments, things left half-done. Margarito's team was the first to actually get it right the first time. They were on time, thorough, and when I had a question they picked up the phone. That's all I ever wanted."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">KM</div>
+          <div>
+            <div class="testimonial-name">Karen M.</div>
+            <div class="testimonial-location">Parker, CO</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Fair pricing, no surprises on the bill. The quote was exactly what I paid. The crew was polite and clearly knew what they were doing—attention to detail was impressive. Baseboards, light fixtures, behind appliances. They didn't skip anything. Genuinely a pleasure to work with."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RP</div>
+          <div>
+            <div class="testimonial-name">Robert P.</div>
+            <div class="testimonial-location">Parker, CO</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I manage several rental properties and reliable cleaning between tenants is everything. Value Cleaning has been my go-to for years now. Always responsive, always punctual, and the workmanship is consistently excellent. I recommend Margarito to every property owner I know."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JD</div>
+          <div>
+            <div class="testimonial-name">Jennifer D.</div>
+            <div class="testimonial-location">Lone Tree, CO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-container">
+    <div class="fade-in">
+      <div class="section-label">About</div>
+      <h2 class="section-heading">16 years. Same values. Same standards.</h2>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-images">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1624640010799-7cdb3b4b1ae1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxtYW4lMjB3b3JraW5nJTIwaGFuZHMlMjBmb2N1c2VkfGVufDF8MXx8fDE3NzM2MTA4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Margarito working with focused attention to detail" loading="lazy">
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1731363106135-83fb05b5accb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwbWVtYmVyJTIwcG9ydHJhaXQlMjB1bmlmb3JtfGVufDF8MXx8fDE3NzM2MTA4NTl8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Value Cleaning Services team member" loading="lazy">
+        </div>
+      </div>
+      <div class="about-text">
+        <p>Margarito started Value Cleaning Services in 2010 with a simple idea: show up, do honest work, charge a fair price. Sixteen years later, nothing about that has changed.</p>
+        <p>Based in Parker, Colorado, we serve homeowners and businesses across the area. We've built our entire client base through referrals and word-of-mouth—no advertising, no gimmicks. When people trust your work enough to recommend you to their friends and neighbors, that tells you something.</p>
+        <p>We're not the biggest cleaning company in town. We don't want to be. We want to be the one you call again and again because we never give you a reason not to. Clear communication, fair pricing, consistent results. That's the whole business.</p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-value">16</div>
+            <div class="about-stat-label">Years in business</div>
+          </div>
+          <div>
+            <div class="about-stat-value">5.0 ★</div>
+            <div class="about-stat-label">Google rating</div>
+          </div>
+          <div>
+            <div class="about-stat-value">8</div>
+            <div class="about-stat-label">Five-star reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-content fade-in">
+    <h2>Ready for a cleaner you can actually rely on?</h2>
+    <p>No pressure. No obligation. Just a straightforward conversation about what you need and what it'll cost.</p>
+    <button class="btn-cta-white cta-trigger">Get Your Free Estimate</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Value Cleaning Services</div>
+      <p class="footer-desc">Residential and commercial cleaning in Parker, Colorado. 16 years of reliable, transparent service. Built on referrals, not advertising.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul class="footer-links">
+        <li><a href="#pain">Why Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">Process</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <div class="footer-contact-item">
+        <a href="tel:+13039280809">303-928-0809</a>
+      </div>
+      <div class="footer-contact-item">
+        <a href="mailto:roan@valuecleaningservices.com">roan@valuecleaningservices.com</a>
+      </div>
+      <div class="footer-contact-item">
+        Parker, Colorado
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Value Cleaning Services. All rights reserved.</span>
+    <span>Parker, Colorado</span>
+  </div>
+</footer>
+
+<!-- CONTACT POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <button class="popup-close" id="popupClose" aria-label="Close contact form">✕</button>
+    <div id="contactForm">
+      <h3>Get a Free Estimate</h3>
+      <p class="popup-sub">Tell us about your space. We'll get back to you within one business day—usually sooner.</p>
+      <form id="estimateForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(303) 000-0000" required>
+        </div>
+        <div class="form-group">
+          <label for="message">What do you need cleaned?</label>
+          <textarea id="message" name="message" placeholder="Tell us about your home or space, what you're looking for, and any timing preferences."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Request</button>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="checkmark">✓</div>
+      <h4>We got your message.</h4>
+      <p>Margarito or a member of our team will be in touch within one business day. If it's urgent, call us directly at <strong><a href="tel:+13039280809" style="color:var(--forest);">303-928-0809</a></strong>.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nav scroll behavior
+const nav = document.getElementById('nav');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+  lastScroll = window.scrollY;
+});
+
+// Mobile menu
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburgerBtn.addEventListener('click', () => {
+  mobileMenu.classList.add('active');
+  document.body.style.overflow = 'hidden';
+});
+
+mobileClose.addEventListener('click', () => {
+  mobileMenu.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+document.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
+
+// Contact popup
+const popupOverlay = document.getElementById('popupOverlay');
+const popupClose = document.getElementById('popupClose');
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+const estimateForm = document.getElementById('estimateForm');
+
+document.querySelectorAll('.cta-trigger').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = 'hidden';
+    popupOverlay.classList.add('active');
+    contactForm.style.display = 'block';
+    formSuccess.style.display = 'none';
+  });
+});
+
+popupClose.addEventListener('click', () => {
+  popupOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+popupOverlay.addEventListener('click', (e) => {
+  if (e.target === popupOverlay) {
+    popupOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+estimateForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  contactForm.style.display = 'none';
+  formSuccess.style.display = 'block';
+});
+
+// Escape key closes popup and mobile menu
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    popupOverlay.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// Fade-in on scroll
+const observerOptions = {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
