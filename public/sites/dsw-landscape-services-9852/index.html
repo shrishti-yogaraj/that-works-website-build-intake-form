@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSW Landscape Services | Parker, Colorado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage: #7A8C6E;
+      --sage-light: #A3B595;
+      --sage-dark: #4F5E45;
+      --clay: #A0674A;
+      --clay-light: #C28B6F;
+      --charcoal: #2C2C2C;
+      --charcoal-mid: #3F3F3F;
+      --stone: #BFB8A8;
+      --stone-light: #EAE5DC;
+      --warm-white: #F7F4EF;
+      --text-dark: #1E1E1E;
+      --text-mid: #4A4A4A;
+      --text-light: #7A7A7A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--warm-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, padding 0.35s, box-shadow 0.35s;
+    }
+
+    nav.scrolled {
+      background: rgba(28, 28, 24, 0.96);
+      padding: 14px 40px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-brand span { color: var(--sage-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: var(--sage);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 3px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--sage-dark) !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(28,28,24,0.98);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: #fff;
+      font-size: 1.4rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .mobile-menu .mobile-cta {
+      background: var(--sage);
+      padding: 14px 36px;
+      border-radius: 3px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1722725648713-f73f1cd1f5b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxiYWNreWFyZCUyMHRyYW5zZm9ybWF0aW9uJTIwYmVmb3JlJTIwYWZ0ZXJ8ZW58MXwwfHx8MTc3MzYzOTU0Nnww&ixlib=rb-4.1.0&q=80&w=1080');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(20,22,18,0.72) 0%,
+        rgba(20,22,18,0.45) 55%,
+        rgba(20,22,18,0.25) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 40px;
+      max-width: 760px;
+      margin-left: 8%;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--sage-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border-left: 2px solid var(--sage-light);
+      padding-left: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--sage-light);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,0.82);
+      max-width: 560px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--sage);
+      color: #fff;
+      padding: 16px 34px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--sage-dark); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      border: 1.5px solid rgba(255,255,255,0.55);
+      color: #fff;
+      padding: 16px 34px;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+      z-index: 2;
+      display: flex;
+      gap: 32px;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #fff;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .hero-stat span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--sage-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 96px 40px; }
+
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 16px;
+      border-left: 2px solid var(--sage);
+      padding-left: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      max-width: 580px;
+      line-height: 1.75;
+    }
+
+    /* ── PAIN ── */
+    .pain { background: var(--charcoal); }
+
+    .pain .section-title { color: #fff; }
+    .pain .section-label { color: var(--sage-light); border-color: var(--sage-light); }
+    .pain .section-sub { color: rgba(255,255,255,0.65); max-width: 640px; margin-bottom: 64px; }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .pain-card {
+      background: rgba(255,255,255,0.04);
+      padding: 44px 36px;
+      border-top: 3px solid var(--sage);
+      transition: background 0.25s;
+    }
+
+    .pain-card:hover { background: rgba(255,255,255,0.07); }
+
+    .pain-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: rgba(255,255,255,0.08);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .pain-card h3 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .pain-card p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.75;
+    }
+
+    /* ── SOLUTION ── */
+    .solution { background: var(--warm-white); }
+
+    .solution-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .solution-img-wrap {
+      position: relative;
+    }
+
+    .solution-img-main {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    .solution-img-accent {
+      position: absolute;
+      bottom: -32px;
+      right: -32px;
+      width: 200px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 2px;
+      border: 6px solid var(--warm-white);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    .solution-list {
+      list-style: none;
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .solution-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .solution-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .solution-check svg { width: 11px; height: 11px; }
+
+    .solution-list li p {
+      font-size: 0.97rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    .solution-list li strong { color: var(--text-dark); }
+
+    .solution-cta-wrap { margin-top: 44px; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--stone-light); }
+
+    .how-header { text-align: center; margin-bottom: 72px; }
+    .how-header .section-sub { margin: 0 auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--stone);
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      padding: 0 40px 0 0;
+    }
+
+    .step-num {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      box-shadow: 0 0 0 8px var(--stone-light);
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--warm-white); }
+
+    .test-header { margin-bottom: 64px; }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .test-card {
+      background: #fff;
+      padding: 40px 36px;
+      border-radius: 2px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      border-bottom: 3px solid var(--sage);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .test-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 20px;
+    }
+
+    .stars span { color: #D4A843; font-size: 1rem; }
+
+    .test-quote {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .test-quote::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--sage-light);
+      line-height: 0;
+      vertical-align: -0.65em;
+      margin-right: 4px;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .test-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      flex-shrink: 0;
+    }
+
+    .test-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+
+    .test-loc {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .test-badge {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 32px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      flex-wrap: wrap;
+    }
+
+    .test-badge-text {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .test-badge-text strong { color: var(--sage-light); }
+
+    .test-badge-rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .test-badge-rating strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #fff;
+    }
+
+    .test-badge-rating span { color: #D4A843; font-size: 1.1rem; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--stone-light); }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 2px;
+    }
+
+    .about-body .section-sub {
+      margin-bottom: 24px;
+      max-width: none;
+    }
+
+    .about-body p {
+      font-size: 0.97rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 44px;
+      padding-top: 44px;
+      border-top: 1px solid var(--stone);
+    }
+
+    .about-stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .about-stat span {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 72px 40px 36px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand span { color: var(--sage-light); }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage-light);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: #fff; }
+
+    .footer-contact-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .footer-contact-item svg { flex-shrink: 0; margin-top: 2px; }
+
+    .footer-contact-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .footer-contact-item a {
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+
+    .footer-contact-item a:hover { color: #fff; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-phone-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sage);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .footer-phone-cta:hover { background: var(--sage-dark); }
+
+    /* ── POPUPS ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(3px);
+    }
+
+    .popup-overlay.open { display: flex; }
+
+    .popup {
+      background: #fff;
+      border-radius: 4px;
+      padding: 52px 48px;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.94) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--text-light);
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.2s;
+    }
+
+    .popup-close:hover { color: var(--text-dark); }
+
+    .popup-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 10px;
+    }
+
+    .popup h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      border: 1.5px solid #DDD8D0;
+      border-radius: 3px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: #FAFAF8;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--sage);
+    }
+
+    .field textarea { resize: vertical; min-height: 90px; }
+
+    .popup-submit {
+      width: 100%;
+      background: var(--sage);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+
+    .popup-submit:hover { background: var(--sage-dark); }
+
+    .popup-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .popup-success.show { display: block; }
+
+    .popup-success .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .popup-success .success-icon svg { width: 28px; height: 28px; color: #fff; }
+
+    .popup-success h3 {
+      font-size: 1.4rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .popup-success p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin-bottom: 0;
+    }
+
+    /* ── RESOURCE POPUP ── */
+    .resource-popup .popup {
+      max-width: 480px;
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .resource-popup .popup h2 { color: #fff; }
+    .resource-popup .popup-label { color: var(--sage-light); }
+    .resource-popup .popup p { color: rgba(255,255,255,0.7); }
+    .resource-popup .popup-close { color: rgba(255,255,255,0.5); }
+    .resource-popup .popup-close:hover { color: #fff; }
+
+    .resource-popup .field label { color: rgba(255,255,255,0.8); }
+
+    .resource-popup .field input {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .resource-popup .field input::placeholder { color: rgba(255,255,255,0.35); }
+    .resource-popup .field input:focus { border-color: var(--sage-light); }
+
+    .resource-list {
+      list-style: none;
+      margin: 0 0 28px;
+    }
+
+    .resource-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .resource-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      flex-shrink: 0;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 72px 24px; }
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content { margin-left: 0; padding: 0 24px; max-width: 100%; }
+      .hero-stats { right: 24px; bottom: 28px; gap: 20px; }
+      .hero-stat strong { font-size: 1.5rem; }
+
+      .solution-inner,
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+
+      .solution-img-accent { display: none; }
+      .solution-img-main,
+      .about-img { height: 320px; }
+
+      .about-inner .about-body { order: -1; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+
+      .steps::before { display: none; }
+      .steps { gap: 40px; }
+
+      .about-stats { grid-template-columns: repeat(3,1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-stats { display: none; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { text-align: center; }
+
+      .pain-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+
+      .popup { padding: 36px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .about-stats { grid-template-columns: 1fr 1fr; }
+
+      .test-badge { flex-direction: column; gap: 12px; }
+      .test-badge-rating { margin-left: 0; }
+
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">DSW <span>Landscape Services</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#" class="nav-cta open-contact">Free Estimate</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#how" class="mobile-link">Process</a>
+  <a href="#testimonials" class="mobile-link">Reviews</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#" class="mobile-cta open-contact">Free Estimate</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Parker, Colorado · Residential Landscaping</p>
+    <h1>Your Yard Deserves Someone Who <em>Shows Up</em></h1>
+    <p>DSW Landscape Services designs, builds, and maintains yards in Parker. Dustin Weland—the owner—is on every project. No handoffs. No surprises. Just honest pricing and work that holds.</p>
+    <div class="hero-actions">
+      <button class="btn-primary open-contact">Get a Free Estimate</button>
+      <a href="#testimonials" class="btn-ghost">Read What Clients Say</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <strong>5.0</strong>
+      <span>Star Rating</span>
+    </div>
+    <div class="hero-stat">
+      <strong>28</strong>
+      <span>Google Reviews</span>
+    </div>
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Owner-Led</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAIN ── -->
+<section class="pain" id="pain">
+  <div class="container">
+    <p class="section-label">Sound Familiar?</p>
+    <h2 class="section-title fade-in">Most Landscaping Contractors<br>Leave You Holding the Bag</h2>
+    <p class="section-sub fade-in delay-1">Parker homeowners with real yards and real budgets deserve better than the three problems below. You've probably already run into at least one of them.</p>
+    <div class="pain-grid" style="margin-top:56px;">
+      <div class="pain-card fade-in">
+        <div class="pain-number">01</div>
+        <h3>The Quote That Grows</h3>
+        <p>You get a competitive bid, then watch it expand. Change orders, "unexpected" complications—and by the end, you've paid 30% more than quoted.</p>
+      </div>
+      <div class="pain-card fade-in delay-1">
+        <div class="pain-number">02</div>
+        <h3>The Owner Who Disappears</h3>
+        <p>The person who sold you the job hands off to a crew lead you've never met, then goes silent. You're managing a contractor you hired so you wouldn't have to manage anything.</p>
+      </div>
+      <div class="pain-card fade-in delay-2">
+        <div class="pain-number">03</div>
+        <h3>Work That Doesn't Last</h3>
+        <p>It looks fine in October. By spring, drainage is off, irrigation heads are misaligned, and half the plants didn't survive. Rushed planning always shows up eventually—on your dime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOLUTION ── -->
+<section class="solution" id="services">
+  <div class="container">
+    <div class="solution-inner">
+      <div class="solution-img-wrap fade-in">
+        <img class="solution-img-main"
+             src="https://images.unsplash.com/photo-1738598665698-7fd7af4b5e0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxpcnJpZ2F0aW9uJTIwc3lzdGVtJTIwaW5zdGFsbGF0aW9uJTIwZGV0YWlsfGVufDF8MHx8fDE3NzM2Mzk1NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+             alt="Irrigation installation detail" />
+        <img class="solution-img-accent"
+             src="https://images.unsplash.com/photo-1701441006531-7cb82256c3f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxsYW5kc2NhcGUlMjBkZXNpZ24lMjBwbGFudGluZyUyMGJlZHN8ZW58MXwwfHx8MTc3MzYzOTU0Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+             alt="Planting bed detail" />
+      </div>
+      <div class="fade-in delay-1">
+        <p class="section-label">What DSW Does Differently</p>
+        <h2 class="section-title">Design. Build. Maintain. Own It.</h2>
+        <p class="section-sub">DSW handles the full scope—design and planning, installation, irrigation, and seasonal maintenance—as one integrated process, not four disconnected vendors.</p>
+        <ul class="solution-list">
+          <li>
+            <div class="solution-check">
+              <svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg>
+            </div>
+            <p><strong>Dustin on every project.</strong> Not just the proposal—the planning, the build, and the walkthrough. Every decision runs through the person whose name is on the company.</p>
+          </li>
+          <li>
+            <div class="solution-check">
+              <svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg>
+            </div>
+            <p><strong>Quotes that hold.</strong> Final cost comes in right at the number quoted—no under-bidding to win the job, no adding line items once work begins.</p>
+          </li>
+          <li>
+            <div class="solution-check">
+              <svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg>
+            </div>
+            <p><strong>Transparent communication.</strong> Slowdowns get addressed immediately—not buried or explained away after the fact. You're never left wondering what's happening.</p>
+          </li>
+          <li>
+            <div class="solution-check">
+              <svg viewBox="0 0 12 10" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,5 4.5,9 11,1"/></svg>
+            </div>
+            <p><strong>Work built to last.</strong> Quality takes planning, working the plan, and adjusting along the way. DSW builds yards that hold up through Colorado winters, not just through October.</p>
+          </li>
+        </ul>
+        <div class="solution-cta-wrap">
+          <button class="btn-primary open-contact" style="background:var(--sage-dark);">Talk to Dustin About Your Yard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how-header fade-in">
+      <p class="section-label">The Process</p>
+      <h2 class="section-title">How a DSW Project Works</h2>
+      <p class="section-sub">Three straightforward steps. No handoffs, no surprises, no disappearing act once the contract is signed.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h3>Free On-Site Estimate</h3>
+        <p>Dustin visits your property, walks the full yard, and listens before he talks. He'll ask about how you use the space, what's not working, and what you'd love it to be. The estimate comes with a real plan, not a ballpark.</p>
+      </div>
+      <div class="step fade-in delay-1">
+        <div class="step-num">2</div>
+        <h3>Design, Approve, Build</h3>
+        <p>Once you've approved the plan and pricing, DSW's experienced crew gets to work—with Dustin on-site directing the job. Adjustments are communicated in real time, not buried in change orders.</p>
+      </div>
+      <div class="step fade-in delay-2">
+        <div class="step-num">3</div>
+        <h3>Final Walkthrough & Ongoing Care</h3>
+        <p>When the project wraps, Dustin walks the yard with you, explains the irrigation setup, and answers every question. For clients who want it, DSW handles ongoing seasonal maintenance so the investment holds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="test-header">
+      <p class="section-label">From Real Clients</p>
+      <h2 class="section-title fade-in">Work That Speaks for Itself</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card fade-in">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="test-quote">Dustin's experience and vision always a plus. I have used this company in the past and did not hesitate to call them for my new project. His employees are experienced and perfectionists in their work. Excellent work once again.</p>
+        <div class="test-author">
+          <div class="test-avatar">M</div>
+          <div>
+            <p class="test-name">Michelle R.</p>
+            <p class="test-loc">Parker, CO · Repeat Client</p>
+          </div>
+        </div>
+      </div>
+      <div class="test-card fade-in delay-1">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="test-quote">Extremely honest pricing—our final cost came out right on the dot with the quote. Lots of contractors under-bid and start adding items the moment they start working. That didn't happen with Dustin at all. Quality work, transparent throughout.</p>
+        <div class="test-author">
+          <div class="test-avatar">T</div>
+          <div>
+            <p class="test-name">Thomas K.</p>
+            <p class="test-loc">Parker, CO · 9,500 sq ft Yard Transformation</p>
+          </div>
+        </div>
+      </div>
+      <div class="test-card fade-in delay-2">
+        <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="test-quote">Quality work takes planning, working the plan, and making adjustments along the way. Dustin and his team do exactly that. The finished yard is beyond our expectations. Well worth the wait—you won't be disappointed when you hire DSW.</p>
+        <div class="test-author">
+          <div class="test-avatar">J</div>
+          <div>
+            <p class="test-name">Jennifer & Craig W.</p>
+            <p class="test-loc">Parker, CO · Full Backyard Redesign</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="test-badge fade-in">
+      <div class="test-badge-text">
+        <strong>5.0 stars across 28 Google reviews</strong> — verified by real homeowners in Parker and the surrounding area.
+        Also highly recommended on <strong>Nextdoor</strong> by neighbors who've worked with Dustin personally.
+      </div>
+      <div class="test-badge-rating">
+        <strong>5.0</strong>
+        <span>★★★★★</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="fade-in">
+        <img class="about-img"
+             src="https://images.unsplash.com/photo-1627647212101-b9c08f46a7ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxtYW4lMjBpbnNwZWN0aW5nJTIwZ2FyZGVuJTIwd29ya3xlbnwxfDF8fHwxNzczNjM5NTQ2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+             alt="Dustin Weland inspecting project" />
+      </div>
+      <div class="about-body fade-in delay-1">
+        <p class="section-label">About DSW</p>
+        <h2 class="section-title">The Anti-Contractor Contractor</h2>
+        <p>DSW Landscape Services is a small, owner-led operation built around a simple idea: if you're going to put your name on a yard, you show up for every part of it.</p>
+        <p>Dustin Weland founded DSW to do residential landscaping the right way—comprehensive design, quality installation, and irrigation work that doesn't cut corners. He's built a reputation in Parker not through advertising, but through referrals from homeowners who trusted him with significant backyards and got exactly what was promised.</p>
+        <p>Clients name Dustin in their reviews because they worked with Dustin. Not a salesperson who handed them to a crew. Not a project manager who checked in once a week. Dustin shows up, makes decisions, communicates problems, and delivers results. That's what keeps people calling back.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <strong>5.0</strong>
+            <span>Star Rating</span>
+          </div>
+          <div class="about-stat">
+            <strong>28</strong>
+            <span>Google Reviews</span>
+          </div>
+          <div class="about-stat">
+            <strong>100%</strong>
+            <span>Owner-Led</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand">DSW <span>Landscape Services</span></p>
+        <p class="footer-desc">Residential landscaping, lawn maintenance, and seasonal yard care in Parker, Colorado. Owner-operated. Honest pricing. Work that holds.</p>
+        <br />
+        <button class="btn-primary open-contact" style="font-size:0.88rem; padding:13px 26px;">Request a Free Estimate</button>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how">Our Process</a></li>
+          <li><a href="#testimonials">Client Reviews</a></li>
+          <li><a href="#about">About DSW</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.39a16 16 0 006.72 6.72l1.76-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <p><a href="tel:+13036690974">+1 (303) 669-0974</a></p>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <p><a href="mailto:Dswlandscapeservices@gmail.com">Dswlandscapeservices@gmail.com</a></p>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p>Parker, Colorado</p>
+        </div>
+        <br />
+        <a href="tel:+13036690974" class="footer-phone-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.39a16 16 0 006.72 6.72l1.76-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call (303) 669-0974
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DSW Landscape Services. Parker, Colorado. All rights reserved.</p>
+      <p>Serving Parker and surrounding Douglas County communities.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── CONTACT POPUP ── -->
+<div class="popup-overlay" id="contactPopup">
+  <div class="popup">
+    <button class="popup-close" id="closeContact">&times;</button>
+    <div id="contactForm">
+      <p class="popup-label">Free Estimate</p>
+      <h2>Let's Talk About Your Yard</h2>
+      <p>Tell us a bit about your project. Dustin will follow up personally to schedule a free on-site visit.</p>
+      <div class="form-row">
+        <div class="field">
+          <label for="c-name">Your Name</label>
+          <input type="text" id="c-name" placeholder="First & Last" />
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone Number</label>
+          <input type="tel" id="c-phone" placeholder="(303) 000-0000" />
+        </div>
+        <div class="field full">
+          <label for="c-email">Email Address</label>
+          <input type="email" id="c-email" placeholder="you@email.com" />
+        </div>
+        <div class="field full">
+          <label for="c-message">Tell Us About Your Project</label>
+          <textarea id="c-message" placeholder="What are you hoping to do with your yard? Size of the space, current condition, what you're envisioning..."></textarea>
+        </div>
+      </div>
+      <button class="popup-submit" id="contactSubmit">Send My Request</button>
+    </div>
+    <div class="popup-success" id="contactSuccess">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+      </div>
+      <h3>You're on Dustin's radar.</h3>
+      <p>Expect a personal follow-up within one business day to schedule your free on-site estimate. We look forward to seeing your yard.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESOURCE POPUP ── -->
+<div class="popup-overlay resource-popup" id="resourcePopup">
+  <div class="popup">
+    <button class="popup-close" id="closeResource">&times;</button>
+    <div id="resourceForm">
+      <p class="popup-label">Free Download</p>
+      <h2>Parker Homeowner's Yard Planning Guide</h2>
+      <p>Before you hire anyone, know what to ask. We put together a free guide covering:</p>
+      <ul class="resource-list">
+        <li>The 5 questions every landscaping estimate should answer</li>
+        <li>How to read an irrigation plan (and spot cheap shortcuts)</li>
+        <li>Colorado-specific planting timing for Parker's climate zone</li>
+        <li>What a realistic backyard transformation budget looks like</li>
+      </ul>
+      <div class="field">
+        <label for="r-name">Your Name</label>
+        <input type="text" id="r-name" placeholder="First & Last" />
+      </div>
+      <div class="field">
+        <label for="r-email">Email Address</label>
+        <input type="email" id="r-email" placeholder="you@email.com" />
+      </div>
+      <button class="popup-submit" id="resourceSubmit" style="background:var(--sage-light);">Send Me the Guide</button>
+    </div>
+    <div class="popup-success" id="resourceSuccess" style="color: var(--text-dark);">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+      </div>
+      <h3 style="color:#fff;">Guide is on its way.</h3>
+      <p style="color:rgba(255,255,255,0.7);">Check your inbox. And when you're ready to talk about your specific yard, Dustin is a call away.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Hero image load
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('load', () => {
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Contact popup
+  const contactPopup = document.getElementById('contactPopup');
+  document.querySelectorAll('.open-contact').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactPopup.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  document.getElementById('closeContact').addEventListener('click', () => {
+    contactPopup.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  contactPopup.addEventListener('click', (e) => {
+    if (e.target === contactPopup) {
+      contactPopup.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.getElementById('contactSubmit').addEventListener('click', () => {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactSuccess').classList.add('show');
+  });
+
+  // Resource popup
+  const resourcePopup = document.getElementById('resourcePopup');
+  let resourceShown = false;
+
+  window.addEventListener('scroll', () => {
+    if (resourceShown) return;
+    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrolled >= 0.6) {
+      resourceShown = true;
+      resourcePopup.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  document.getElementById('closeResource').addEventListener('click', () => {
+    resourcePopup.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  resourcePopup.addEventListener('click', (e) => {
+    if (e.target === resourcePopup) {
+      resourcePopup.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.getElementById('resourceSubmit').addEventListener('click', () => {
+    document.getElementById('resourceForm').style.display = 'none';
+    document.getElementById('resourceSuccess').classList.add('show');
+  });
+
+  // Fade in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
