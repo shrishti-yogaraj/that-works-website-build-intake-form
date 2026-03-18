@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beauty by KG | Nail & Hair Salon — Parker, CO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:        #F9F5EF;
+      --taupe:        #C8B8A2;
+      --taupe-dark:   #9E8B76;
+      --blush:        #D4A898;
+      --blush-dark:   #B8806E;
+      --charcoal:     #2A2520;
+      --charcoal-mid: #4A4440;
+      --stone:        #E5DDD4;
+      --warm-white:   #FBF8F4;
+      --text-dark:    #1E1A17;
+      --text-mid:     #5A5047;
+      --text-light:   #8A8078;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      color: var(--text-dark);
+      background: var(--warm-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.2; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.22s; }
+    .fade-in.delay-3 { transition-delay: 0.36s; }
+    .fade-in.delay-4 { transition-delay: 0.5s; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, box-shadow 0.35s, padding 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(251,248,244,0.96);
+      box-shadow: 0 1px 20px rgba(42,37,32,0.07);
+      padding: 0.9rem 2.5rem;
+      backdrop-filter: blur(6px);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.95);
+      transition: color 0.35s;
+    }
+    nav.scrolled .nav-brand { color: var(--charcoal); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blush); }
+    nav.scrolled .nav-links a { color: var(--text-mid); }
+    nav.scrolled .nav-links a:hover { color: var(--blush-dark); }
+
+    .nav-cta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.5rem;
+      border: 1.5px solid rgba(255,255,255,0.65);
+      color: var(--warm-white);
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--warm-white);
+      color: var(--charcoal);
+      border-color: var(--warm-white);
+    }
+    nav.scrolled .nav-cta {
+      border-color: var(--blush-dark);
+      color: var(--blush-dark);
+    }
+    nav.scrolled .nav-cta:hover {
+      background: var(--blush-dark);
+      color: var(--warm-white);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 2px;
+      transition: background 0.35s, transform 0.3s, opacity 0.3s;
+    }
+    nav.scrolled .hamburger span { background: var(--charcoal); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--ivory);
+      z-index: 850;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+    .mobile-menu a:hover { color: var(--blush-dark); }
+    .mobile-menu-cta {
+      margin-top: 0.75rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.25rem;
+      background: var(--blush-dark);
+      color: var(--warm-white);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 1rem 2.75rem;
+      background: var(--blush-dark);
+      color: var(--warm-white);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--blush); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.5rem;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.9);
+      background: transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.9);
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6.5rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blush-dark);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 1.1rem;
+    }
+    .section-intro {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1673241072599-3b0ae88df1db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHNhbG9uJTIwY2hhaXIlMjBtaXJyb3J8ZW58MXwwfHx8MTc3MzgwODQ5OHww&ixlib=rb-4.1.0&q=80&w=1080');
+      background-size: cover;
+      background-position: center 30%;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26,22,18,0.5) 0%,
+        rgba(26,22,18,0.35) 50%,
+        rgba(26,22,18,0.58) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 740px;
+    }
+    .hero-location {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blush);
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline {
+      font-size: clamp(3rem, 8vw, 5.8rem);
+      font-weight: 400;
+      color: var(--warm-white);
+      line-height: 1.06;
+      margin-bottom: 1.5rem;
+    }
+    .hero-headline em { font-style: italic; }
+    .hero-sub {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 2.75rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 44px;
+      background: rgba(255,255,255,0.3);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      51%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ── EXPERIENCE TEASER ── */
+    #experience { background: var(--ivory); padding: 7rem 1.5rem; }
+    .experience-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .experience-inner { grid-template-columns: 1fr; gap: 3.5rem; }
+    }
+    .experience-image-wrap {
+      position: relative;
+    }
+    .experience-img-main {
+      width: 100%;
+      height: 520px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .experience-img-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .experience-img-main:hover img { transform: scale(1.04); }
+    .experience-pull-quote {
+      position: absolute;
+      bottom: -1.75rem;
+      right: -1.5rem;
+      background: var(--warm-white);
+      border-left: 3px solid var(--blush);
+      padding: 1.25rem 1.5rem;
+      max-width: 240px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--charcoal-mid);
+      line-height: 1.5;
+      box-shadow: 0 8px 30px rgba(42,37,32,0.1);
+    }
+    @media (max-width: 768px) {
+      .experience-pull-quote { display: none; }
+    }
+    .experience-copy { padding-bottom: 1.75rem; }
+    .experience-copy .section-intro { max-width: 100%; margin-bottom: 1.5rem; }
+    .experience-copy p {
+      font-size: 0.97rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .experience-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2.25rem;
+    }
+    .experience-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .experience-detail-dot {
+      flex-shrink: 0;
+      margin-top: 0.6rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blush-dark);
+    }
+    .experience-detail span {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--warm-white); padding: 7rem 1.5rem; }
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 768px) {
+      .services-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    }
+    .services-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    @media (max-width: 768px) {
+      .services-header-right { align-items: flex-start; }
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--stone);
+    }
+    .service-card-img {
+      height: 400px;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .service-card-img { height: 280px; }
+    }
+    .service-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .service-card:hover .service-card-img img { transform: scale(1.06); }
+    .service-card-body {
+      padding: 2rem 1.75rem 2.25rem;
+      background: var(--ivory);
+    }
+    .service-card-body h3 {
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+    }
+    .service-card-body p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* ── ATMOSPHERE STRIP ── */
+    #atmosphere { padding: 0; }
+    .atmosphere-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 500px;
+    }
+    @media (max-width: 600px) {
+      .atmosphere-strip { grid-template-columns: 1fr; height: auto; }
+      .atmosphere-panel { height: 320px; }
+    }
+    .atmosphere-panel {
+      overflow: hidden;
+      position: relative;
+    }
+    .atmosphere-panel img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .atmosphere-panel:hover img { transform: scale(1.05); }
+    .atmosphere-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,22,18,0.55) 0%, transparent 60%);
+    }
+    .atmosphere-caption {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 2.25rem;
+      right: 2.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--warm-white);
+      line-height: 1.35;
+    }
+    .atmosphere-caption cite {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-style: normal;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.5rem;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--charcoal); }
+    #how .eyebrow { color: var(--blush); }
+    #how .section-title { color: var(--warm-white); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+    @media (max-width: 768px) {
+      .how-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    .how-step {
+      position: relative;
+      padding-top: 1rem;
+    }
+    .how-step-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 400;
+      color: var(--blush);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .how-step h3 {
+      font-size: 1.45rem;
+      color: var(--warm-white);
+      margin-bottom: 0.75rem;
+    }
+    .how-step p {
+      font-size: 0.93rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+    }
+    .how-cta-wrap {
+      margin-top: 4rem;
+      padding-top: 3.5rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .how-cta-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      line-height: 1.4;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--ivory); }
+    .testimonials-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 768px) {
+      .testimonials-intro { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    }
+    .stars-row {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .star {
+      width: 14px;
+      height: 14px;
+      background: var(--blush-dark);
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    }
+    .rating-note {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 0.4rem;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    .testimonial-card {
+      background: var(--warm-white);
+      border: 1px solid var(--stone);
+      border-radius: 2px;
+      padding: 2.25rem 2rem;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem;
+      color: var(--blush);
+      opacity: 0.2;
+      line-height: 0.7;
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1.75rem;
+      padding-top: 1.75rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--stone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--blush-dark);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+    }
+    .testimonial-tag {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--warm-white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    }
+    .about-copy .section-intro { max-width: 100%; margin-bottom: 1.5rem; }
+    .about-copy p {
+      font-size: 0.97rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.75rem;
+      padding-top: 2.75rem;
+      border-top: 1px solid var(--stone);
+    }
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 500;
+      color: var(--blush-dark);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.4rem;
+    }
+    .about-images { position: relative; }
+    .about-img-primary {
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .about-img-primary img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-inset {
+      position: absolute;
+      bottom: -2rem;
+      left: -1.5rem;
+      width: 50%;
+      height: 220px;
+      overflow: hidden;
+      border-radius: 2px;
+      border: 4px solid var(--warm-white);
+      box-shadow: 0 8px 32px rgba(42,37,32,0.12);
+    }
+    .about-img-inset img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 768px) {
+      .about-img-inset { display: none; }
+      .about-img-primary { height: 380px; }
+    }
+
+    /* ── SOCIAL ── */
+    #social { background: var(--ivory); }
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .social-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    .social-img {
+      height: 420px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .social-img img { width: 100%; height: 100%; object-fit: cover; }
+    .social-copy .section-intro { max-width: 100%; margin-bottom: 2rem; }
+    .social-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .social-perks li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.93rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    .social-perks li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 0.6rem;
+      width: 18px;
+      height: 1px;
+      background: var(--blush-dark);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A1612;
+      padding: 4.5rem 1.5rem 2.5rem;
+      color: rgba(255,255,255,0.38);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      color: var(--warm-white);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+    .footer-tagline {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      max-width: 300px;
+    }
+    .footer-col h4 {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.38);
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--blush); }
+    .footer-contact p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .footer-contact a { color: rgba(255,255,255,0.38); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--blush); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+    }
+
+    /* ── POPUP OVERLAY ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,22,18,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+    .popup-overlay.open { display: flex; }
+    .popup-box {
+      background: var(--warm-white);
+      border-radius: 3px;
+      max-width: 500px;
+      width: 100%;
+      padding: 3rem 2.75rem;
+      position: relative;
+      animation: popIn 0.28s ease;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .popup-close {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .popup-close:hover { color: var(--charcoal); }
+    .popup-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blush-dark);
+      margin-bottom: 0.6rem;
+    }
+    .popup-title {
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+    }
+    .popup-sub {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 1.75rem;
+      line-height: 1.65;
+    }
+    .popup-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .form-field input,
+    .form-field textarea {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--stone);
+      border-radius: 2px;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--blush-dark); }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+    .form-success { display: none; text-align: center; padding: 0.5rem 0; }
+    .form-success.show { display: block; }
+    .form-success p { font-size: 1rem; color: var(--text-mid); line-height: 1.7; }
+    .form-success strong { color: var(--blush-dark); }
+
+    @media (max-width: 480px) {
+      .popup-box { padding: 2.25rem 1.5rem; }
+      .popup-title { font-size: 1.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#experience" onclick="closeMobileMenu()">The Experience</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+    <button class="mobile-menu-cta" onclick="openContact(); closeMobileMenu()">Book an Appointment</button>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="mainNav">
+    <div class="nav-brand">Beauty by KG</div>
+    <ul class="nav-links">
+      <li><a href="#experience">The Experience</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openContact()">Book Now</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-location fade-in visible">Parker, Colorado</p>
+      <h1 class="hero-headline fade-in visible delay-1">The appointment<br>you actually <em>look forward to.</em></h1>
+      <p class="hero-sub fade-in visible delay-2">Kelsey Gabrielsen brings full attention, premium products, and the kind of care that makes her clients come back — every single time.</p>
+      <div class="hero-ctas fade-in visible delay-3">
+        <button class="btn-primary" onclick="openContact()">Book an Appointment</button>
+        <a href="#experience" class="btn-ghost">See the Experience</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE TEASER ── -->
+  <section id="experience">
+    <div class="container">
+      <div class="experience-inner">
+        <div class="experience-image-wrap fade-in">
+          <div class="experience-img-main">
+            <img src="https://images.unsplash.com/photo-1641371084529-1f4c8d40cea3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwdGVjaG5pY2lhbiUyMGhhbmRzJTIwd29ya3xlbnwxfDB8fHwxNzczODA4NDk4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Kelsey's nail work up close" loading="lazy" />
+          </div>
+          <div class="experience-pull-quote">
+            "The best pedicure I've had since moving to Colorado."
+          </div>
+        </div>
+        <div class="experience-copy fade-in delay-2">
+          <p class="eyebrow">What to expect</p>
+          <h2 class="section-title">Warm. Unhurried. Yours.</h2>
+          <p>You walk into a space that's beautiful and calm — curated, not clinical. Kelsey greets you, settles you in, and listens. Not nods-and-moves-on listens. Actually listens.</p>
+          <p>You leave with exactly what you described, plus the small touches that make it feel like a genuine occasion: a glass of champagne, a neck wrap, a massage that isn't rushed to fit a schedule. Her pedicures include a scrub, a full massage, and color consultation — every time.</p>
+          <p>Products come from The Refillary, a local Colorado company Kelsey chose on purpose. Everything about this place was chosen on purpose.</p>
+          <div class="experience-details">
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>Complimentary champagne</span>
+            </div>
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>Neck wrap included</span>
+            </div>
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>Full scrub &amp; massage</span>
+            </div>
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>One-on-one only</span>
+            </div>
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>Local Refillary products</span>
+            </div>
+            <div class="experience-detail">
+              <div class="experience-detail-dot"></div>
+              <span>Color consultation every visit</span>
+            </div>
+          </div>
+          <div style="margin-top:2.75rem;">
+            <button class="btn-primary" onclick="openContact()">Book Your Visit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="fade-in">
+          <p class="eyebrow">What Kelsey offers</p>
+          <h2 class="section-title">Nails. Hair. All of it done right.</h2>
+        </div>
+        <div class="services-header-right fade-in delay-1">
+          <p style="font-size:0.95rem;color:var(--text-mid);line-height:1.7;text-align:right;" class="mobile-left">Every service is booked one-on-one. No double-booking. No rushing. Just Kelsey and you.</p>
+        </div>
+      </div>
+      <div class="services-grid fade-in delay-1">
+        <div class="service-card">
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1741278232341-33534050414c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZSUyMHBvbGlzaCUyMGFwcGxpY2F0aW9uJTIwZGV0YWlsfGVufDF8MHx8fDE3NzM4MDg0OTh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Manicure polish application" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <h3>Manicure</h3>
+            <p>Kelsey's manicures come out exactly as described — she takes the time to understand what you're going for and adds her professional eye to get it right. Gel, classic, or custom nail art.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1611073615723-e06aceba76d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGZlZXQlMjBwZWRpY3VyZSUyMG1hc3NhZ2V8ZW58MXwwfHx8MTc3MzgwODQ5OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Pedicure and foot massage" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <h3>Pedicure</h3>
+            <p>The full experience: scrub, massage, color consultation, and the kind of result that makes clients say their feet feel amazing. Champagne and a neck wrap included. It's "next level" — client's words.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-img">
+            <img src="https://images.unsplash.com/photo-1605180427725-95e306fc0e9a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxibG93b3V0JTIwaGFpciUyMHN0eWxpbmclMjB0cmFuc2Zvcm1hdGlvbnxlbnwxfDB8fHwxNzczODA4NDk4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Hair blowout styling" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <h3>Blowout &amp; Hair</h3>
+            <p>Kelsey's blowouts are "perfection" — that's a direct quote. She listens to what you want and delivers it with the same attention to detail she brings to everything. Zero guesswork.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ATMOSPHERE STRIP ── -->
+  <section id="atmosphere">
+    <div class="atmosphere-strip">
+      <div class="atmosphere-panel">
+        <img src="https://images.unsplash.com/photo-1730635249913-3b5fce30dc34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxjaGFtcGFnbmUlMjBnbGFzcyUyMHNwYSUyMHNldHRpbmd8ZW58MXwwfHx8MTc3MzgwODQ5OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Champagne in the salon" loading="lazy" />
+        <div class="atmosphere-overlay"></div>
+        <div class="atmosphere-caption">
+          "She delivered a luxury experience from start to finish."
+          <cite>— Google Review</cite>
+        </div>
+      </div>
+      <div class="atmosphere-panel">
+        <img src="https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxjcmVhbSUyMHRvd2VsJTIwdGV4dHVyZSUyMGx1eHVyeXxlbnwxfDB8fHwxNzczODA4NDk4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Luxury salon atmosphere" loading="lazy" />
+        <div class="atmosphere-overlay"></div>
+        <div class="atmosphere-caption">
+          "The vibe is so fun and cozy. She did not miss a thing."
+          <cite>— Google Review</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section id="how">
+    <div class="container">
+      <div style="max-width:560px;">
+        <p class="eyebrow fade-in">Getting started</p>
+        <h2 class="section-title fade-in delay-1">From "I need a break" to Kelsey's chair.</h2>
+      </div>
+      <div class="how-grid">
+        <div class="how-step fade-in delay-1">
+          <div class="how-step-number">01</div>
+          <h3>Send your request</h3>
+          <p>Fill out the short form on this page. Tell Kelsey what you're looking for — service, timing, any preferences. She'll reach back personally to confirm and talk through the details.</p>
+        </div>
+        <div class="how-step fade-in delay-2">
+          <div class="how-step-number">02</div>
+          <h3>Walk into the room</h3>
+          <p>Her salon is the kind of space clients describe as "the cutest place ever." Clean, calm, beautifully put together. Settle in, help yourself to champagne, and tell Kelsey what you're envisioning.</p>
+        </div>
+        <div class="how-step fade-in delay-3">
+          <div class="how-step-number">03</div>
+          <h3>Leave feeling it.</h3>
+          <p>Walk out with exactly what you came for — plus the small details that stay with you. This is why her clients call themselves "forever customers." You'll understand after the first visit.</p>
+        </div>
+      </div>
+      <div class="how-cta-wrap fade-in delay-2">
+        <p class="how-cta-text">"I can honestly say it's the best pedicure I've had since moving to Colorado."</p>
+        <button class="btn-primary" onclick="openContact()">Book an Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="testimonials-intro">
+        <div class="fade-in">
+          <div class="stars-row">
+            <div class="star"></div><div class="star"></div><div class="star"></div>
+            <div class="star"></div><div class="star"></div>
+          </div>
+          <p class="eyebrow">11 Reviews · 5.0 on Google</p>
+          <h2 class="section-title">Every review mentions Kelsey by name.</h2>
+          <p class="rating-note">That's not an accident — it's the whole point.</p>
+        </div>
+        <div class="fade-in delay-2" style="display:flex;align-items:flex-end;">
+          <p style="font-size:0.95rem;color:var(--text-mid);line-height:1.75;">When the experience is this personal, gratitude is personal too. Read what her clients say — in their own words, unsolicited, unprompted.</p>
+        </div>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in delay-1">
+          <p class="testimonial-text">I booked a mani-pedi on a whim after a rough week. Kelsey's space is immaculate — like walking into someone's dream room. I showed her an inspo photo, she asked two good questions, and my nails came out better than the photo. The pedicure had champagne, a neck wrap, the works. I am a forever customer.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Mara T.</div>
+              <div class="testimonial-tag">Mani/Pedi · Parker, CO</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in delay-2">
+          <p class="testimonial-text">My feet have never looked this good — and I've been getting pedicures for twenty years. Kelsey uses products from The Refillary and you can feel the difference. She never once glanced at the clock. The massage alone was worth the trip. I've already referred four friends.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-name">Sarah W.</div>
+              <div class="testimonial-tag">Pedicure · Parker, CO</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in delay-3">
+          <p class="testimonial-text">Took my daughter here for her birthday and we both left grinning. Kelsey is so much fun to spend time with — and so detail-obsessed. My blowout was exactly how I described it and my daughter's nails were next level. We're already planning our next visit.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">Jamie R.</div>
+              <div class="testimonial-tag">Blowout &amp; Nails · Parker, CO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy fade-in">
+          <p class="eyebrow">About Kelsey</p>
+          <h2 class="section-title">One person. Full attention. Every time.</h2>
+          <p>Kelsey Gabrielsen opened Beauty by KG in Parker, Colorado in 2025 — a deliberate decision to build something rare: a one-woman salon where you're not one of eight appointments that day. You're the appointment.</p>
+          <p>She sources products from The Refillary, a local Colorado company, because the quality shows and she won't compromise on it. She's hosted community mixers and supports other women-owned businesses in Parker. She's a small business owner managing family and a full client roster, and she brings that same care — efficient, warm, detail-oriented — to every chair.</p>
+          <p>Her reviews don't say "great salon." They say <em>Kelsey.</em></p>
+          <div style="margin-top:2.25rem;">
+            <button class="btn-primary" onclick="openContact()">Book With Kelsey</button>
+          </div>
+          <div class="about-stats">
+            <div>
+              <div class="stat-value">5.0</div>
+              <div class="stat-label">Google Rating</div>
+            </div>
+            <div>
+              <div class="stat-value">11+</div>
+              <div class="stat-label">Reviews</div>
+            </div>
+            <div>
+              <div class="stat-value">2025</div>
+              <div class="stat-label">Est. Parker, CO</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-images fade-in delay-2">
+          <div class="about-img-primary">
+            <img src="https://images.unsplash.com/photo-1624673130139-e04e46d8d680?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGxpc3RlbmluZyUyMGNvbnZlcnNhdGlvbiUyMHBvcnRyYWl0fGVufDF8MXx8fDE3NzM4MDg0OTh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Kelsey Gabrielsen, Beauty by KG" loading="lazy" />
+          </div>
+          <div class="about-img-inset">
+            <img src="https://images.unsplash.com/photo-1671797023168-5d4efd07f514?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHxzdHlsaXN0JTIwY2xpZW50JTIwY29uc3VsdGF0aW9uJTIwY2xvc2UtdXB8ZW58MXwxfHx8MTc3MzgwODQ5OHww&ixlib=rb-4.1.0&q=80&w=1080" alt="Kelsey consulting a client" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOCIAL ── -->
+  <section id="social">
+    <div class="container">
+      <div class="social-grid">
+        <div class="social-img fade-in">
+          <img src="https://images.unsplash.com/photo-1766818437909-622059064eb1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4OTU1NTd8MHwxfHNlYXJjaHwxfHx3b21lbiUyMGZyaWVuZHMlMjBzYWxvbiUyMGFwcG9pbnRtZW50fGVufDF8MHx8fDE3NzM4MDg0OTh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Women friends at the salon" loading="lazy" />
+        </div>
+        <div class="social-copy fade-in delay-2">
+          <p class="eyebrow">Stay in the loop</p>
+          <h2 class="section-title">Promos, openings &amp; community.</h2>
+          <p class="section-intro" style="max-width:100%;margin-bottom:2rem;">Kelsey puts out promotions and appointment availability on Instagram — it's the best way to catch openings and offers like the $75 gift certificate + $25 free deal.</p>
+          <ul class="social-perks">
+            <li>Follow <strong>@beautybykg</strong> on Instagram for promos and nail inspo</li>
+            <li>Gift certificates available — a present that actually means something</li>
+            <li>Community events and mixers throughout the year — watch the feed</li>
+          </ul>
+          <button class="btn-primary" onclick="openContact()">Book an Appointment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Beauty by KG</div>
+        <p class="footer-tagline">Kelsey Gabrielsen's one-woman nail and hair salon in Parker, Colorado. Where the appointment is actually worth it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#experience">The Experience</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About Kelsey</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p><a href="tel:+17206823408">720-682-3408</a></p>
+        <p><a href="mailto:kgabrielsen93@gmail.com">kgabrielsen93@gmail.com</a></p>
+        <p style="margin-top:0.75rem;color:rgba(255,255,255,0.25);">Parker, Colorado</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Beauty by KG. All rights reserved.</span>
+      <span><a href="tel:+17206823408" style="color:inherit;">720-682-3408</a> &mdash; Parker, CO</span>
+    </div>
+  </footer>
+
+  <!-- ── CONTACT POPUP ── -->
+  <div class="popup-overlay" id="contactPopup">
+    <div class="popup-box">
+      <button class="popup-close" onclick="closeContact()" aria-label="Close">&times;</button>
+      <p class="popup-eyebrow">Book an Appointment</p>
+      <h2 class="popup-title">Let's get you on the calendar.</h2>
+      <p class="popup-sub">Fill this out and Kelsey will reach out personally to confirm your appointment and talk through what you're looking for.</p>
+      <div class="form-success" id="contactSuccess">
+        <p><strong>You're on your way.</strong> Kelsey will be in touch shortly to confirm your appointment. She's looking forward to it.</p>
+      </div>
+      <form class="popup-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+        <div class="form-field">
+          <label for="c-name">Your Name</label>
+          <input type="text" id="c-name" name="name" placeholder="First &amp; last name" required />
+        </div>
+        <div class="form-field">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" name="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-field">
+          <label for="c-phone">Phone</label>
+          <input type="tel" id="c-phone" name="phone" placeholder="720-555-0000" />
+        </div>
+        <div class="form-field">
+          <label for="c-message">What are you booking? Any preferences?</label>
+          <textarea id="c-message" name="message" placeholder="e.g. Mani/pedi, blowout, gel in a warm nude…"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Send My Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── RESOURCE POPUP ── -->
+  <div class="popup-overlay" id="resourcePopup">
+    <div class="popup-box">
+      <button class="popup-close" onclick="closeResource()" aria-label="Close">&times;</button>
+      <p class="popup-eyebrow">Limited Offer</p>
+      <h2 class="popup-title">Buy $75, get $25 free.</h2>
+      <p class="popup-sub">Kelsey runs gift certificate promotions for her community. Drop your name and email to be first to hear about openings, seasonal offers, and deals.</p>
+      <div class="form-success" id="resourceSuccess">
+        <p><strong>You're in.</strong> Kelsey will be in touch with upcoming promos and availability. Welcome to the community.</p>
+      </div>
+      <form class="popup-form" id="resourceForm" onsubmit="handleResourceSubmit(event)">
+        <div class="form-field">
+          <label for="r-name">Your Name</label>
+          <input type="text" id="r-name" name="name" placeholder="First name" required />
+        </div>
+        <div class="form-field">
+          <label for="r-email">Email</label>
+          <input type="email" id="r-email" name="email" placeholder="you@example.com" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Get Me on the List</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ── Nav scroll behaviour ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // ── Mobile menu ──
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
+    // ── Fade-in on scroll ──
+    const faders = document.querySelectorAll('.fade-in:not(.visible)');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(el => io.observe(el));
+
+    // ── Contact popup ──
+    function openContact() {
+      document.getElementById('contactPopup').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeContact() {
+      document.getElementById('contactPopup').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('contactPopup').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeContact();
+    });
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('contactSuccess').classList.add('show');
+    }
+
+    // ── Resource popup ──
+    function openResource() {
+      document.getElementById('resourcePopup').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeResource() {
+      document.getElementById('resourcePopup').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('resourcePopup').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeResource();
+    });
+    function handleResourceSubmit(e) {
+      e.preventDefault();
+      document.getElementById('resourceForm').style.display = 'none';
+      document.getElementById('resourceSuccess').classList.add('show');
+    }
+
+    // ── Scroll-triggered resource popup — once per session at 60% page depth ──
+    let resourceShown = !!sessionStorage.getItem('resourceShown');
+    window.addEventListener('scroll', () => {
+      if (resourceShown) return;
+      if ((window.scrollY + window.innerHeight) / document.body.scrollHeight >= 0.6) {
+        resourceShown = true;
+        sessionStorage.setItem('resourceShown', '1');
+        openResource();
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
